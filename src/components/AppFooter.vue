@@ -1,5 +1,6 @@
 <template>
-  <div>Footer</div>
+  <footer>
+  </footer>
 </template>
 <script setup lang="ts">
 
