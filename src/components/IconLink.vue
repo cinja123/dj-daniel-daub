@@ -1,12 +1,17 @@
 <template>
   <a :href="props.url">
-    <img :alt="props.label" :src="require(`../assets/media/icons/${props.icon}`)" />
+    <img class="icon" :alt="props.label" :src="require(`../assets/media/icons/${props.icon}`)" />
     <span>{{ props.label }}</span>
   </a>
 </template>
 <script setup lang="ts">
   import { defineProps } from 'vue';
 
+  /**
+   * url: url for href
+   * icon: name of to be displayed icon file
+   * label: label showing up next to icon
+   */
   const props = defineProps<{
     url: string;
     icon: string;
@@ -20,8 +25,6 @@
     display: flex;
     align-items: center;
     img {
-      width: 1rem;
-      min-width: 16px;
       padding: 0 10px;
     }
   }
