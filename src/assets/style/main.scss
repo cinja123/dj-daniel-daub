@@ -1,7 +1,7 @@
 :root {
   --main-bg: #0e1111;
   --main-text: #ffffff;
-  --orange: #eabe7c;
+  --orange: #ff8c00;
   --greenblue: #93b7be;
   --blue: #6290C3;
   --red: #AA5042;
@@ -10,4 +10,21 @@
 body {
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+html {
+  font-size: calc(15px + 0.390625vw);
+}
+
+.icon {
+  width: 1rem;
+  min-width: 16px;
+  filter: invert(78%) sepia(42%) saturate(7374%) hue-rotate(359deg) brightness(100%) contrast(105%);
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-text);
 }

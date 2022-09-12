@@ -1,7 +1,7 @@
 <template>
   <header></header>
   <main></main>
-  <AppFooter></AppFooter>
+  <app-footer/>
 </template>
 <script setup lang="ts">
   import AppFooter from '@/components/AppFooter.vue';
