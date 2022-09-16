@@ -1,6 +1,6 @@
 <template>
   <a :href="props.url">
-    <img class="icon" :alt="props.label" :src="require(`../assets/media/icons/${props.icon}`)" />
+    <img class="icon-small iconBG color-orange" :alt="props.label" :src="require(`../assets/media/icons/${props.icon}`)" />
     <span>{{ props.label }}</span>
   </a>
 </template>
