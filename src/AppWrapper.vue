@@ -1,5 +1,7 @@
 <template>
-  <dock class="navBar" :model="sections" :position="navPosition">
+
+  <div style="position: fixed;">{{showNav}}</div>
+  <dock v-if="isScrolling" class="navBar" :model="sections" :position="navPosition">
     <template #icon="{ item }">
       <div class="item-wrapper">
         <span v-if="navPosition === 'right'" :class="'label-' + navPosition">{{ item.label }}</span>
@@ -29,15 +31,27 @@
 
   /**
    * Define position of navbar based on window width
-  */
-  onMounted(() => {
-    nextTick(() => window.addEventListener('resize', onResize))
-  })
+   */
+  onMounted(() => nextTick(() => window.addEventListener('resize', onResize)))
   onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   const onResize = () => {
     navPosition.value = window.innerWidth > 900 ? 'right' : 'top';
   }
   const navPosition = ref<'right' | 'top'>('right');
+
+  /**
+   * Handle show navbar on scroll
+   */
+  const isScrolling = ref(false);
+  let timeoutId = 0;
+  onMounted(() => nextTick(() => scrollDetector()))
+  const scrollDetector = () => {
+    window.addEventListener('scroll', () => {
+      isScrolling.value = true;
+      window.clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => isScrolling.value = false, 100)
+    })
+  }
 
 </script>
 <style lang="scss" scoped>
