@@ -1,20 +1,20 @@
 <template>
-  <header></header>
-  <main></main>
-  <flip-button
-    icon="facebook.svg"
-    label="Test"
-    @buttonClick="onButtonClick"
-  />
+  <app-header :items="sections" />
+
+  <main style="height: 50vh"></main>
+
   <app-footer/>
 </template>
 <script setup lang="ts">
 import AppFooter from '@/components/AppFooter.vue';
-import FlipButton from './components/FlipButton.vue';
+import AppHeader from './components/AppHeader.vue';
 
-const onButtonClick = (event: Event) => {
-  console.log(event);
-}
+const sections = [
+  {label: 'about me', icon: 'danielFace.svg', id: 'about-me'},
+  {label: 'music', icon: 'turntable.svg', id: 'music'},
+  {label: 'gallery', icon: 'image.svg', id: 'gallery'},
+  {label: 'contact', icon: 'addressCard.svg', id: 'contact'},
+]
 
 </script>
 <style lang="scss" scoped>
