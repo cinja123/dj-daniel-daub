@@ -1,5 +1,4 @@
 <template>
-  <div>{{hoveringNav}}</div>
   <dock v-if="isScrolling || hoveringNav || mouseMoving" class="navBar" :model="sections" :position="navPosition" @mouseover="hoveringNav = true" @mouseleave="hoveringNav = false">
     <template #icon="{ item }">
       <div class="item-wrapper">
