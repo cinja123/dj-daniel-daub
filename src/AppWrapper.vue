@@ -1,10 +1,13 @@
 <template>
   <dock class="navBar" :model="sections" :position="navPosition">
     <template #icon="{ item }">
-      <img class="icon iconBG color-white" 
-        :alt="item.label?.toString()" 
-        :src="require(`./assets/media/icons/${item.icon}`)"
-      />
+      <div class="item-wrapper">
+        <span v-if="navPosition === 'right'" :class="'label-' + navPosition">{{ item.label }}</span>
+        <img :class="`icon iconBG color-white nav-${navPosition}`" 
+          :alt="item.label?.toString()" 
+          :src="require(`./assets/media/icons/${item.icon}`)"
+        />
+      </div>
     </template>
   </dock>
 
@@ -14,7 +17,8 @@
 </template>
 <script setup lang="ts">
   import AppFooter from '@/components/AppFooter.vue';
-  import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+
 
   const sections = [
     {label: 'about me', icon: 'nav_daniel.svg', id: 'about-me'},
@@ -40,15 +44,36 @@
   .navBar {
     position: fixed;
 
-    img {
-      transition: all 0.2 ease;
-      width: 40px !important; 
-      margin: 20px 15px;
-      cursor: pointer;
-  
-      &:hover, &:focus {
-        filter: invert(78%) sepia(42%) saturate(7374%) hue-rotate(359deg) brightness(100%) contrast(105%);
+    .item-wrapper {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 40px !important; 
+        margin: 20px 15px;
+        cursor: pointer;
       }
+
+      .label-right {
+        width: 80px;
+        text-align: right;
+        cursor: pointer;
+        visibility: hidden;
+        font-size: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      &:hover, &:focus {
+        img {
+          filter: invert(78%) sepia(42%) saturate(7374%) hue-rotate(359deg) brightness(100%) contrast(105%);
+        }
+
+        .label-right {
+          visibility: visible;
+        }
+      }
+
     }
+
   }
 </style>
