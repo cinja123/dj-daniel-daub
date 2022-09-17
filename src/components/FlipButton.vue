@@ -1,7 +1,18 @@
 <template>
-  <button class="flip-btn" type="button" @click="onButtonClick($event)">
-    <span class="flip-btn-front">{{ props.label }}</span> 
-    <img class="icon iconBG color-orange flip-btn-back" :alt="props.alt || props.label" :src="require(`../assets/media/icons/${props.icon}`)" />
+  <button :class="`flip-btn ${props.class}`" type="button" @click="onButtonClick($event)">
+    <span class="flip-btn-front"
+      :style="`
+        color: ${props.styleFront?.color};
+        font-size: ${props.styleFront?.fontSize};
+        font-weight: ${props.styleFront?.fontWeight};
+      `"
+    >
+      {{ props.label }}
+    </span> 
+    <img :class="`icon iconBG ${props.styleBack?.color||'color-orange'} flip-btn-back`" 
+      :alt="props.alt || props.label" 
+      :src="require(`../assets/media/icons/${props.icon}`)" 
+    />
   </button>
 </template>
 <script setup lang="ts">
@@ -9,10 +20,26 @@ import { defineProps, defineEmits } from 'vue';
 
 const emit = defineEmits(['buttonClick'])
 
+/**
+ * icon: name of icon file
+ * label: display name of front button
+ * styleFront: change style of front button
+ * styleBack: change style of back button
+*/
 const props = defineProps<{
   icon: string;
   alt?: string;
   label: string;
+  styleFront?: {
+    border?: string,
+    color?: string,
+    fontSize?: string,
+    fontWeight?: string,
+  };
+  styleBack?: {
+    color?: string,
+  }
+  class?: string,
 }>();
 
 const onButtonClick = (event: Event) => {
@@ -28,19 +55,19 @@ const onButtonClick = (event: Event) => {
   border-radius: 5px;
   display: inline-block;
   height: 30px;
-  width: 135px;
+  min-width: 135px;
   background-color: var(--main-bg);
   cursor: pointer;
   font-size: 100%;
   text-align: center;
-  min-width: 95px;
 
   .flip-btn-front {
     color: var(--main-text);
-    line-height: 25px;
     transform: translateY(0) rotateX(0);
     opacity: 1;
     width: 100%;
+    display: flex;
+    justify-content: center;
     transition: all 0.4s ease;
   }
 
@@ -51,7 +78,6 @@ const onButtonClick = (event: Event) => {
     bottom: 0;
     width: 100%;
     height: 20px;
-    line-height: 25px;
     opacity: 0;
     transform: translateY(-50%) rotateX(-90deg);
     transition: all 0.4s ease;
