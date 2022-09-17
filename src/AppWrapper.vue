@@ -1,7 +1,6 @@
 <template>
-
-  <div style="position: fixed;">{{showNav}}</div>
-  <dock v-if="isScrolling" class="navBar" :model="sections" :position="navPosition">
+  <div>{{hoveringNav}}</div>
+  <dock v-if="isScrolling || hoveringNav || mouseMoving" class="navBar" :model="sections" :position="navPosition" @mouseover="hoveringNav = true" @mouseleave="hoveringNav = false">
     <template #icon="{ item }">
       <div class="item-wrapper">
         <span v-if="navPosition === 'right'" :class="'label-' + navPosition">{{ item.label }}</span>
@@ -43,14 +42,32 @@
    * Handle show navbar on scroll
    */
   const isScrolling = ref(false);
-  let timeoutId = 0;
+  let timeoutIdScroll = 0;
   onMounted(() => nextTick(() => scrollDetector()))
   const scrollDetector = () => {
     window.addEventListener('scroll', () => {
       isScrolling.value = true;
-      window.clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => isScrolling.value = false, 100)
+      window.clearTimeout(timeoutIdScroll);
+      timeoutIdScroll = setTimeout(() => setTimeout(() => isScrolling.value = false, 3000), 100)
     })
+  }
+
+  /*
+   * Handle show navbar when hovering over it
+   */
+  const hoveringNav = ref(false);
+
+  /*
+   * Handle show navbar on mouse moving
+   */
+  const mouseMoving = ref(false);
+  let timeoutIdMouse = 0;
+  onMounted(() => nextTick(() => window.addEventListener('mousemove', onMousemove)))
+  onBeforeUnmount(() => window.removeEventListener('mousemove', onMousemove))
+  const onMousemove = () => {
+    mouseMoving.value = true;
+    window.clearTimeout(timeoutIdMouse);
+    timeoutIdMouse = setTimeout(() => setTimeout(() => mouseMoving.value = false, 3000), 100)
   }
 
 </script>
