@@ -14,8 +14,8 @@
         <ContactBox icon="locationDot.svg">
           <template #text>
             <p>Daniel Daub</p>
-            <p>Im Setzling 5</p>
-            <p>65343 Eltville</p>
+            <p>Elbestraße 50</p>
+            <p>65428 Rüsselsheim</p>
           </template>
         </ContactBox>
         <ContactBox icon="phone.svg">

@@ -16,12 +16,21 @@ body {
 
 html {
   font-size: calc(15px + 0.390625vw);
+  background-color: var(--main-bg);
 }
 
-.icon {
+.icon-small {
   width: 1rem;
   min-width: 16px;
-  filter: invert(78%) sepia(42%) saturate(7374%) hue-rotate(359deg) brightness(100%) contrast(105%);
+}
+
+.iconBG {
+  &.color-orange {
+    filter: invert(78%) sepia(42%) saturate(7374%) hue-rotate(359deg) brightness(100%) contrast(105%);
+  }
+  &.color-white {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(110deg) brightness(103%) contrast(104%);
+  }
 }
 
 a {

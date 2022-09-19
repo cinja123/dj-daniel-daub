@@ -1,6 +1,6 @@
 <template>
   <div class="contact-box-container">
-    <img class="icon" :alt="props.alt ? props.alt : 'icon'" :src="require(`../assets/media/icons/${props.icon}`)" />
+    <img class="icon-small iconBG color-orange" :alt="props.alt ? props.alt : 'icon'" :src="require(`../assets/media/icons/${props.icon}`)" />
     <div>
       <slot name="text"></slot>
     </div>
