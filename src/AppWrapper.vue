@@ -11,7 +11,7 @@
       </div>
     </template>
   </dock>
-  <main>
+  <main ref="scrollSection" data-scroll-container style="min-height: 200vh;">
     <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']"/>
   </main>
   <app-footer/>
@@ -20,6 +20,7 @@
 import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import { onMounted, nextTick, ref, onBeforeUnmount } from 'vue';
+import locomotiveScroll from 'locomotive-scroll';
 
 /**
  **************************************
@@ -81,22 +82,22 @@ import { onMounted, nextTick, ref, onBeforeUnmount } from 'vue';
  **************************************
  */
 
-// const scrollSection = ref(null);
-// const scroll = ref<locomotiveScroll>();
-// const scrollIns = null;
+const scrollSection = ref(null);
+const scroll = ref<locomotiveScroll>();
+const scrollIns = null;
 
-// const initLocoScroll = () => {
-//   scroll.value = new locomotiveScroll({
-//     el: scrollSection.value,
-//     smooth: true,
-//     smoothMobile: true,
-//     getDirection: true,
-//   });
-// }
+const initLocoScroll = () => {
+  scroll.value = new locomotiveScroll({
+    el: scrollSection.value,
+    smooth: true,
+    smoothMobile: true,
+    getDirection: true,
+  });
+}
 
-// onMounted(() => {
-//   nextTick(() => {initLocoScroll()})
-// })
+onMounted(() => {
+  nextTick(() => {initLocoScroll()})
+})
 
 </script>
 <style lang="scss" scoped>

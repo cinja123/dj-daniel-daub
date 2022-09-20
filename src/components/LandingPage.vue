@@ -1,6 +1,6 @@
 <template>
-  <article id="landing" ref="scrollSection" data-scroll-container>
-    <section  style="min-height: 200vh;">
+  <article ref="localeScrollContainer" id="landing" :data-scroll-container="props.scrollContainer">
+    <section :style="props.scrollContainer ? 'min-height: 200vh;' : ''">
       <div data-scroll-section>
         <div class="pictures-wrap">
           <p v-for="(line, index) in linePictures" :key="index" 
@@ -13,7 +13,8 @@
           </p>
         </div>
       </div>
-    </section>    
+    </section>
+    <slot name="content"></slot>    
   </article>
 </template>
 <script lang="ts" setup>
@@ -23,6 +24,7 @@
   const props = defineProps<{
     pictures: string[];
     logo?: string;
+    scrollContainer?: boolean;
   }>()
 
   const reOrderArray = (value:number, element: string[]): {line: string[], element: string[]}  => {
@@ -52,13 +54,13 @@
   initPicLines();
   
 
-  const scrollSection = ref(null);
+  const localeScrollContainer = ref(null);
   const scroll = ref<locomotiveScroll>();
   const scrollIns = null; // eslint-disable-line
 
   const initLocoScroll = () => {
     scroll.value = new locomotiveScroll({
-      el: scrollSection.value,
+      el: localeScrollContainer.value,
       smooth: true,
       smoothMobile: true,
       getDirection: true,
@@ -66,7 +68,9 @@
   }
 
   onMounted(() => {
-    nextTick(() => {initLocoScroll()})
+    if (props.scrollContainer){
+      nextTick(() => {initLocoScroll()})
+    }
   })
 </script>
 <style lang="scss">
