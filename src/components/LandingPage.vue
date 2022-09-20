@@ -12,8 +12,12 @@
             ></span>
           </p>
         </div>
+        <img v-if="props.logo" :src="require('@/assets/media/logos/' + props.logo)" alt="Logo" 
+          data-scroll data-scroll-speed="5"
+        />
       </div>
     </section>
+    
     <slot name="content"></slot>    
   </article>
 </template>
@@ -99,7 +103,7 @@
           }
           
           @media screen and (min-width: 1000px) {
-            transform: translateX(-30%) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+            transform: translateX(-30%) translateY(10vh) translateZ(50px) rotateX(72deg) rotateZ(12deg);
           }
         
     
@@ -115,8 +119,8 @@
             display: inline-block;
             width: 200px;
             height: 200px;
-            margin: 5px;
-            opacity: 0.9;
+            margin: 6px;
+            opacity: 0.7;
 
             @media screen and (min-width: 400px) {
               width: 250px;
@@ -126,6 +130,13 @@
               width: 300px;
             }
           }
+        }
+
+        img {
+          width: 40%;
+          position: absolute;
+          top: 38vh;
+          left: 50%;
         }
       }
     }

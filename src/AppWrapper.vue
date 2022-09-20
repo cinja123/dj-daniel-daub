@@ -12,7 +12,7 @@
     </template>
   </dock>
   <main ref="scrollSection" data-scroll-container style="min-height: 200vh;">
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']"/>
+    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']" logo="logo_white.png"/>
   </main>
   <app-footer/>
 </template>
