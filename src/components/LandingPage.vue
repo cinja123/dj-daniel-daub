@@ -1,9 +1,10 @@
 <template>
-  <article id="landing" ref="scrollSection">
-      <section class="picture-container" data-scroll-container>
-        <div data-scroll-section>
-          <p v-for="(line, index) in linePictures" :key="index" data-scroll
-            :data-scroll-speed="index%2 === 0 ? 2 : -2" data-scroll-direction="horizontal"
+  <article id="landing" ref="scrollSection" data-scroll-container>
+    <section  style="min-height: 200vh;">
+      <div data-scroll-section>
+        <div class="pictures-wrap">
+          <p v-for="(line, index) in linePictures" :key="index" 
+            data-scroll :data-scroll-speed="index%2 === 0 ? 2 : -2" data-scroll-direction="horizontal"
           >
             <span v-for="(pic, picIndex) in line" :key="index + picIndex"
               :class="'picture-line-image line-' + index"  
@@ -11,23 +12,8 @@
             ></span>
           </p>
         </div>
-        
-      </section>
-
-
-
-    <!-- <div  style="min-height: 200vh">
-      <div data-scroll-container>
-          <div data-scroll-section>
-              <h1 data-scroll>Hey</h1>
-              <p data-scroll>👋</p>
-          </div>
-          <div data-scroll-section>
-              <h2 data-scroll data-scroll-speed="1">What's up?</h2>
-              <p data-scroll data-scroll-speed="2">😬</p>
-          </div>
       </div>
-    </div> -->
+    </section>    
   </article>
 </template>
 <script lang="ts" setup>
@@ -43,7 +29,6 @@
     //fill up to have at least same length
     if (element.length < value) {
       const difference = element.length + Math.ceil(value / element.length);
-      console.log('differnce', difference);
       for (let i = 0; i < difference; i++){
         element.push(element[i % element.length]);
       }
@@ -85,20 +70,41 @@
   })
 </script>
 <style lang="scss">
+
   #landing {
     min-height: 100vh;
-  }
-  .picture-container {
-    width: 200%;
+    border: 1px solid green;
+    overflow: hidden;
+    
 
+    > section {
 
-    .picture-line-image {
-      background-size: cover;
-      outline: 1px solid transparent;
-      display: inline-block;
-      width: 15%;
-      height: 200px;
+      > div {
+        position: relative;
+        perspective: 1000px;
 
+        .pictures-wrap {
+          transform: translateX(-30%) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+        
+    
+          p {
+            white-space: nowrap;
+            width: 200%; 
+            margin: 0;
+            
+          }
+          .picture-line-image {
+            background-size: cover;
+            outline: 1px solid transparent;
+            display: inline-block;
+            width: 300px;
+            height: 200px;
+            max-width: 350px;
+            margin: 5px;
+            opacity: 0.9;
+          }
+        }
+      }
     }
   }
 </style>
