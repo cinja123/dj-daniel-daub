@@ -88,7 +88,19 @@
         perspective: 1000px;
 
         .pictures-wrap {
-          transform: translateX(-30%) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+          transform: translateX(-90%) translateY(-20vh) translateZ(-500px) rotateX(60deg) rotateZ(12deg);
+
+          @media screen and (min-width: 450px) {
+            transform: translateX(-90%) translateZ(-400px) rotateX(60deg) rotateZ(12deg);
+          }
+
+          @media screen and (min-width: 850px) {
+            transform: translateX(-60%) translateZ(-500px) rotateX(72deg) rotateZ(12deg);
+          }
+          
+          @media screen and (min-width: 1000px) {
+            transform: translateX(-30%) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+          }
         
     
           p {
@@ -101,11 +113,18 @@
             background-size: cover;
             outline: 1px solid transparent;
             display: inline-block;
-            width: 300px;
+            width: 200px;
             height: 200px;
-            max-width: 350px;
             margin: 5px;
             opacity: 0.9;
+
+            @media screen and (min-width: 400px) {
+              width: 250px;
+            }
+
+            @media screen and (min-width: 600px) {
+              width: 300px;
+            }
           }
         }
       }

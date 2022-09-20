@@ -96,7 +96,9 @@ const initLocoScroll = () => {
 }
 
 onMounted(() => {
-  nextTick(() => {initLocoScroll()})
+  nextTick(() => {
+    initLocoScroll();
+  })
 })
 
 </script>
