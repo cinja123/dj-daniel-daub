@@ -17,6 +17,7 @@
         />
       </div>
     </section>
+    
     <slot name="content"></slot>    
   </article>
 </template>
@@ -92,11 +93,13 @@
 
         .pictures-wrap {
           transform: translateX(-90%) translateY(-20vh) translateZ(-500px) rotateX(60deg) rotateZ(12deg);
+
           @media screen and (min-width: 450px) {
             transform: translateX(-90%) translateZ(-400px) rotateX(60deg) rotateZ(12deg);
           }
+
           @media screen and (min-width: 850px) {
-            transform: translateX(-50%) translateZ(-300px) rotateX(72deg) rotateZ(12deg);
+            transform: translateX(-60%) translateZ(-500px) rotateX(72deg) rotateZ(12deg);
           }
           
           @media screen and (min-width: 1000px) {
