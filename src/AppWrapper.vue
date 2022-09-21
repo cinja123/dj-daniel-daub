@@ -11,8 +11,8 @@
       </div>
     </template>
   </dock>
-  <main ref="scrollSection" data-scroll-container style="min-height: 200vh;">
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']"/>
+  <main ref="scrollSection" data-scroll-container style="height: 200vh">
+    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']" logo="logo_white.png" />
   </main>
   <app-footer/>
 </template>
@@ -90,8 +90,17 @@ const initLocoScroll = () => {
   scroll.value = new locomotiveScroll({
     el: scrollSection.value,
     smooth: true,
-    smoothMobile: true,
     getDirection: true,
+    smartphone: {
+      breakpoint: 0,
+      smooth: true,
+      getDirection: true,
+    },
+    tablet: {
+      breakpoint: 0,
+      smooth: true,
+      getDirection: true,
+    },
   });
 }
 

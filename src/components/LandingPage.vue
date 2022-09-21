@@ -12,6 +12,9 @@
             ></span>
           </p>
         </div>
+        <img v-if="props.logo" :src="require('@/assets/media/logos/' + props.logo)" alt="Logo" 
+          data-scroll data-scroll-speed="5"
+        />
       </div>
     </section>
     <slot name="content"></slot>    
@@ -88,24 +91,53 @@
         perspective: 1000px;
 
         .pictures-wrap {
-          transform: translateX(-30%) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+          transform: translateX(-90%) translateY(-20vh) translateZ(-500px) rotateX(60deg) rotateZ(12deg);
+          @media screen and (min-width: 450px) {
+            transform: translateX(-90%) translateZ(-400px) rotateX(60deg) rotateZ(12deg);
+          }
+          @media screen and (min-width: 850px) {
+            transform: translateX(-50%) translateZ(-300px) rotateX(72deg) rotateZ(12deg);
+          }
+          
+          @media screen and (min-width: 1000px) {
+            transform: translateX(-30%) translateY(10vh) translateZ(50px) rotateX(72deg) rotateZ(12deg);
+          }
         
     
           p {
             white-space: nowrap;
             width: 200%; 
             margin: 0;
-            
           }
+
           .picture-line-image {
             background-size: cover;
             outline: 1px solid transparent;
             display: inline-block;
-            width: 300px;
+            width: 200px;
             height: 200px;
-            max-width: 350px;
-            margin: 5px;
-            opacity: 0.9;
+            margin: 6px;
+            opacity: 0.7;
+          
+            @media screen and (min-width: 400px) {
+              width: 250px;
+            }
+            @media screen and (min-width: 600px) {
+              width: 300px;
+            }
+          }
+        }
+        img {
+          position: absolute;
+          width: 80%;
+          left: 50%;
+          top: 40vh;
+          left: calc(10%);
+          
+          @media screen and (min-width: 900px) {
+            top: 38vh;
+            left: 50%;
+            width: 40%;
           }
         }
       }
