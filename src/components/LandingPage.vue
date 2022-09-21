@@ -133,16 +133,10 @@
         }
 
         img {
+          width: 40%;
           position: absolute;
-          width: 80%;
-          top: 40vh;
-          left: calc(10%);
-
-          @media screen and (min-width: 900px) {
-            top: 38vh;
-            left: 50%;
-            width: 40%;
-          }
+          top: 38vh;
+          left: 50%;
         }
       }
     }
