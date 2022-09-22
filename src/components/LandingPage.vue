@@ -78,12 +78,9 @@
   })
 </script>
 <style lang="scss">
-
   #landing {
     min-height: 100vh;
-    border: 1px solid green;
-    overflow: hidden;
-    
+    border: 1px solid green;    
 
     > section {
 

@@ -8,8 +8,7 @@
 #app {
   color: var(--main-text);
   background-color: var(--main-bg);
-  min-height: 100vh;
-  overflow-x: hidden;
+  overflow: clip;
 }
 
 </style>

@@ -11,14 +11,16 @@
       </div>
     </template>
   </dock>
-  <main ref="scrollSection" data-scroll-container style="min-height: 200vh;">
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg']" logo="logo_white.png"/>
+  <main ref="scrollSection" data-scroll-container>
+    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png"/>
+    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" />
   </main>
   <app-footer/>
 </template>
 <script setup lang="ts">
 import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
+import AboutMe from './components/AboutMe.vue';
 import { onMounted, nextTick, ref, onBeforeUnmount } from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 
@@ -112,6 +114,14 @@ onMounted(() => {
     initLocoScroll();
   })
 })
+
+/**
+ **************************************
+ ************ About Me ****************
+ **************************************
+ */
+
+ const description = "Daniel Daub ist ein DJ aus Mainz. Mit einer knackigen Mischung der neusten Songs aus dem Musikbusiness sowie ihren All Time Favourites weiß der Mainzer Bar-, Club und Veranstaltungsgänger jeden Gast zu begeistern. Seine Vielfältigkeit, die er beim Auflegen zeigt, machte ihn schnell als neuartigen Künstlertypus bei einer Reihe namhafter Veranstalter bekannt. Auf seinen Partys zitiert er gerne House, Hip-Hop, Classics, 90er und Rock immer überraschend, immer mit Style. Seine Sets schaffen damit den unvergleichlichen Spagat zwischen den letzten zwei Jahrzehnten und den Best Ofs. Das macht das Charisma von Daniel Daub aus."
 
 </script>
 <style lang="scss" scoped>
