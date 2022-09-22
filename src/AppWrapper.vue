@@ -37,7 +37,10 @@ import locomotiveScroll from 'locomotive-scroll';
   /**
    * Define position of navbar based on window width
    */
-  onMounted(() => nextTick(() => window.addEventListener('resize', onResize)))
+  onMounted(() => nextTick(() => {
+    window.addEventListener('resize', onResize);
+    onResize();
+  }))
   onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   const onResize = () => {
     navPosition.value = window.innerWidth > 900 ? 'right' : 'top';
