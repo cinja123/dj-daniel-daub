@@ -1,7 +1,7 @@
 <template>
-  <article ref="localeScrollContainer" id="landing" :data-scroll-container="props.scrollContainer">
-    <section :style="props.scrollContainer ? 'min-height: 200vh;' : ''">
-      <div data-scroll-section>
+  <article ref="localeScrollContainer" id="landing" :style="props.scrollContainer ? 'min-height: 200vh;' : ''">
+    <section>
+      <div :data-scroll-section="props.scrollContainer">
         <div class="pictures-wrap">
           <p v-for="(line, index) in linePictures" :key="index" 
             data-scroll :data-scroll-speed="index%2 === 0 ? 2 : -2" data-scroll-direction="horizontal"
@@ -79,7 +79,7 @@
 </script>
 <style lang="scss">
   #landing {
-    height: 100vh;
+    height: 100vh !important;
     border: 1px solid green;    
 
     > section {

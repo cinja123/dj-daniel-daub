@@ -11,11 +11,12 @@
       </div>
     </template>
   </dock>
-  <main ref="scrollSection" data-scroll-container>
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png"/>
-    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" />
+  <main ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
+    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section/>
+    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section/>
+    <app-footer data-scroll-section></app-footer>
   </main>
-  <app-footer/>
+  
 </template>
 <script setup lang="ts">
 import AppFooter from '@/components/AppFooter.vue';

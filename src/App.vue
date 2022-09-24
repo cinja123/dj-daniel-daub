@@ -4,6 +4,7 @@
 
 <style lang="scss">
 @import "assets/style/main.scss";
+@import "assets/style/locomotiveScroll.scss";
 
 #app {
   color: var(--main-text);
