@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "hyphen": "^1.6.4",
     "locomotive-scroll": "^4.1.4",
     "primevue": "^3.17.0",
     "vue": "^3.2.13",
