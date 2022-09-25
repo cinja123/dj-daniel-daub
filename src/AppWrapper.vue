@@ -14,7 +14,7 @@
   <main ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
     <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
     <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
-    <music-examples :videoIds="videoIds" data-scroll-section ></music-examples>
+    <music-examples :videoIds="videoIds" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </main>
   
