@@ -4,7 +4,7 @@
       <section class="description" data-scroll data-scroll-sticky data-scroll-target="#about-wrapper" data-scroll-direction="vertical">
         <p >{{ hyphenatedDesc }}</p>
       </section>
-      <section class="photo-grid" data-scroll data-scroll-speed="20" data-scroll-direction="horizontal">
+      <section class="photo-grid" data-scroll :data-scroll-speed="picGridScrollDirection === 'horizontal' ? 20 : 5" :data-scroll-direction="picGridScrollDirection">
         <span v-for="(img, picIndex) in props.photoGrid" :key="picIndex" 
           :style="`background-image: url('${require('@/assets/media/images/' + img)}')`"
         ></span>
@@ -26,12 +26,22 @@
     hyphenatedDesc.value = result;
   })
 
+  const picGridScrollDirection = ref('vertical');
+  const checkWidth = () => {
+    picGridScrollDirection.value = window.innerWidth > 800 ? 'vertical' : 'horizontal';
+  }
+  onMounted(() => {
+    checkWidth()
+    nextTick(() => {
+      window.addEventListener('resize', checkWidth)
+    })
+  })
+  onBeforeUnmount(() => window.removeEventListener('resize', checkWidth))
 </script>
 <style lang="scss" scoped>
   #about-me {
     border: 1px solid green;
-    padding-bottom: 20vh;
-    
+    padding-bottom: 20vh;    
 
     #about-wrapper {
       //background-color: rgba(100, 100, 100, 0.6);
@@ -39,20 +49,18 @@
       padding-bottom: 20vh;
       @media screen and (min-width: 800px){
         display: flex;
+        height: 150vh;
       }
 
       section {
         //border: 1px dashed red;
-        
-        @media screen and (min-width: 800px){
-          width: 50vw;
-        }
       }
   
       .description {
         height: fit-content;
   
         @media screen and (min-width: 800px) {
+          width: 50vw;
           margin: 0;
         }
   
@@ -92,8 +100,10 @@
         left: -60vw;
   
         @media screen and (min-width: 800px) {
+          width: 46vw;
           padding-left: 2%;
           align-self: flex-end;
+          position: static;
         }
   
         span {

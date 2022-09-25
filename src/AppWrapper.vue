@@ -55,9 +55,10 @@ import locomotiveScroll from 'locomotive-scroll';
    */
   const isScrolling = ref(false);
   let timeoutIdScroll = 0;
-  onMounted(() => nextTick(() => scrollDetector()))
   const scrollDetector = () => {
-    window.addEventListener('scroll', () => {
+    console.log('add scroller');
+    scroll.value.on('scroll', () => {
+      console.log('scrolling');
       isScrolling.value = true;
       window.clearTimeout(timeoutIdScroll);
       timeoutIdScroll = setTimeout(() => setTimeout(() => isScrolling.value = false, 3000), 100)
@@ -113,6 +114,7 @@ const initLocoScroll = () => {
 onMounted(() => {
   nextTick(() => {
     initLocoScroll();
+    scrollDetector();
   })
 })
 
