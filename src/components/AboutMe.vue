@@ -73,7 +73,7 @@
           width: 96%;
           padding: 80px 2% 0 2%;
 
-          @media screen and (min-width: 800px) {
+          @media screen and (min-width: 500px) {
             font-size: 1.3rem;
             line-height: 1.7rem;
             letter-spacing: 0.5px;
