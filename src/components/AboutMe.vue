@@ -50,7 +50,7 @@
 <style lang="scss" scoped>
   #about-me {
     border: 1px solid green;
-    padding-bottom: 20vh;    
+    padding-bottom: 70vh;    
 
     #about-wrapper {
       //background-color: rgba(100, 100, 100, 0.6);
@@ -89,6 +89,7 @@
           }
           
           @media screen and (min-width: 1500px) {
+            padding: 40px 2% 0 2%;
             font-size: 1.5rem;
             line-height: 2rem;
             letter-spacing: 1px;
