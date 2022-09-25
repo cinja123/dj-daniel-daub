@@ -22,13 +22,17 @@
   </article>
 </template>
 <script lang="ts" setup>
-  import { defineProps, ref, onMounted, nextTick } from 'vue';
+  import { defineProps, defineEmits, ref, onMounted, nextTick } from 'vue';
   import locomotiveScroll from 'locomotive-scroll';
 
   const props = defineProps<{
     pictures: string[];
     logo?: string;
     scrollContainer?: boolean;
+  }>()
+
+  const emit = defineEmits<{
+    (e: 'rendered',): void;
   }>()
 
   const reOrderArray = (value:number, element: string[]): {line: string[], element: string[]}  => {
@@ -75,6 +79,14 @@
     if (props.scrollContainer){
       nextTick(() => {initLocoScroll()})
     }
+
+
+    // all elements loaded
+    nextTick(() => {
+      window.addEventListener('load', () => {
+        emit('rendered');
+      })
+    })
   })
 </script>
 <style lang="scss">

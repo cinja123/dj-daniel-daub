@@ -41,12 +41,26 @@
 <script setup lang="ts">
   import IconLink from '@/components/IconLink.vue';
   import ContactBox from '@/components/ContactBox.vue';
+  import { nextTick, onMounted, defineEmits } from 'vue';
+
+  const emit = defineEmits<{
+    (e: 'rendered', ): void;
+  }>()
 
   const contacts = {
     facebook: {label: 'Facebook', url: 'https://www.facebook.com/herrdaub', icon: 'facebook.svg'},
     instagram: {label: 'Instagram', url: 'https://www.instagram.com/herrdaub/', icon: 'instagram.svg'},
     youtube: {label: 'YouTube', url: 'https://www.youtube.com/Daniel%20Daub', icon: 'youtube.svg'},
   };
+
+  // all elements loaded
+  onMounted(() => {
+    nextTick(() => {
+      window.addEventListener('load', () => {
+        emit('rendered');
+      })
+    })
+  })
 
 
 </script>

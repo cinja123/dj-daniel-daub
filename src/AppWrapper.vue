@@ -12,9 +12,9 @@
     </template>
   </dock>
   <main ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section/>
-    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section/>
-    <app-footer data-scroll-section></app-footer>
+    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
+    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
+    <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </main>
   
 </template>
@@ -22,7 +22,7 @@
 import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
-import { onMounted, nextTick, ref, onBeforeUnmount } from 'vue';
+import { onMounted, nextTick, ref, onBeforeUnmount} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 
 /**
@@ -56,9 +56,7 @@ import locomotiveScroll from 'locomotive-scroll';
   const isScrolling = ref(false);
   let timeoutIdScroll = 0;
   const scrollDetector = () => {
-    console.log('add scroller');
     scroll.value.on('scroll', () => {
-      console.log('scrolling');
       isScrolling.value = true;
       window.clearTimeout(timeoutIdScroll);
       timeoutIdScroll = setTimeout(() => setTimeout(() => isScrolling.value = false, 3000), 100)
@@ -111,12 +109,21 @@ const initLocoScroll = () => {
   });
 }
 
+let timeoutidRendered = 0;
+const updateScroll = () => {
+  window.clearTimeout(timeoutidRendered);
+  timeoutidRendered = setTimeout(() => {
+    scroll.value.update();
+  }, 100)
+}
+
 onMounted(() => {
   nextTick(() => {
     initLocoScroll();
     scrollDetector();
   })
 })
+
 
 /**
  **************************************

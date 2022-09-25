@@ -13,12 +13,16 @@
   </article>
 </template>
 <script lang="ts" setup>
-  import { defineProps, ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
+  import { defineProps, defineEmits, ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
   import { hyphenate } from 'hyphen/de-1996';
 
   const props = defineProps<{
     description: string;
     photoGrid: string[];
+  }>()
+
+  const emit = defineEmits<{
+    (e: 'rendered',): void;
   }>()
 
   const hyphenatedDesc = ref('');
@@ -34,6 +38,11 @@
     checkWidth()
     nextTick(() => {
       window.addEventListener('resize', checkWidth)
+
+      // all elements loaded
+      window.addEventListener('load', () => {
+        emit('rendered');
+      })
     })
   })
   onBeforeUnmount(() => window.removeEventListener('resize', checkWidth))
