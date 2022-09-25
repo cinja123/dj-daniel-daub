@@ -14,7 +14,8 @@
     "locomotive-scroll": "^4.1.4",
     "primevue": "^3.17.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "youtube-vue3": "^0.1.15"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

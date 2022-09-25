@@ -14,6 +14,7 @@
   <main ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
     <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
     <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
+    <music-examples :videoIds="videoIds" data-scroll-section ></music-examples>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </main>
   
@@ -22,6 +23,7 @@
 import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
+import MusicExamples from './components/MusicExamples.vue';
 import { onMounted, nextTick, ref, onBeforeUnmount} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 
@@ -131,8 +133,15 @@ onMounted(() => {
  **************************************
  */
 
- const description = "Daniel Daub ist ein DJ aus Mainz. Mit einer knackigen Mischung der neusten Songs aus dem Musikbusiness sowie ihren All Time Favourites weiß der Mainzer Bar-, Club und Veranstaltungsgänger jeden Gast zu begeistern. Seine Vielfältigkeit, die er beim Auflegen zeigt, machte ihn schnell als neuartigen Künstlertypus bei einer Reihe namhafter Veranstalter bekannt. Auf seinen Partys zitiert er gerne House, Hip-Hop, Classics, 90er und Rock immer überraschend, immer mit Style. Seine Sets schaffen damit den unvergleichlichen Spagat zwischen den letzten zwei Jahrzehnten und den Best Ofs. Das macht das Charisma von Daniel Daub aus."
+  const description = "Daniel Daub ist ein DJ aus Mainz. Mit einer knackigen Mischung der neusten Songs aus dem Musikbusiness sowie ihren All Time Favourites weiß der Mainzer Bar-, Club und Veranstaltungsgänger jeden Gast zu begeistern. Seine Vielfältigkeit, die er beim Auflegen zeigt, machte ihn schnell als neuartigen Künstlertypus bei einer Reihe namhafter Veranstalter bekannt. Auf seinen Partys zitiert er gerne House, Hip-Hop, Classics, 90er und Rock immer überraschend, immer mit Style. Seine Sets schaffen damit den unvergleichlichen Spagat zwischen den letzten zwei Jahrzehnten und den Best Ofs. Das macht das Charisma von Daniel Daub aus."
 
+/**
+ **************************************
+ ************ Music Ex ****************
+ **************************************
+ */
+
+  const videoIds = ref(['8NRYD-hPzzM', 'sZnS-NtqLIo', 'wT4wPsBtPA4']);
 </script>
 <style lang="scss" scoped>
   .navBar {
