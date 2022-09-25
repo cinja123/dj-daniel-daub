@@ -53,6 +53,7 @@
 <style lang="scss" scoped>
   footer {
     border-top: 2px solid var(--orange);
+    margin-bottom: 5vh;
 
     article:first-child {
       display: flex;

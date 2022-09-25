@@ -1,10 +1,10 @@
 <template>
   <article id="about-me">
-    <div id="about-wrapper">
-      <section class="description">
-        <p data-scroll data-scroll-sticky data-scroll-target="#about-wrapper">{{ hyphenatedDesc }}</p>
+    <div id="about-wrapper" data-scroll-speed="0" data-scroll >
+      <section class="description" data-scroll data-scroll-sticky data-scroll-target="#about-wrapper" data-scroll-direction="vertical">
+        <p >{{ hyphenatedDesc }}</p>
       </section>
-      <section class="photo-grid" data-scroll data-scroll-speed="5">
+      <section class="photo-grid" data-scroll data-scroll-speed="20" data-scroll-direction="horizontal">
         <span v-for="(img, picIndex) in props.photoGrid" :key="picIndex" 
           :style="`background-image: url('${require('@/assets/media/images/' + img)}')`"
         ></span>
@@ -23,41 +23,33 @@
 
   const hyphenatedDesc = ref('');
   hyphenate(props.description).then((result: string) => {
-    console.log(result);
     hyphenatedDesc.value = result;
   })
 
-  const picGridScroll = ref('vertical')
-  const checkWidth = () => {
-    picGridScroll.value =  window.innerWidth > 800 ? 'vertical' : 'horizontal'
-  }
-  onMounted(() => {
-    checkWidth()
-    nextTick(() => {
-      window.addEventListener('resize', checkWidth);
-    })
-  })
-  onBeforeUnmount(() => window.removeEventListener('resize', checkWidth))
 </script>
 <style lang="scss" scoped>
   #about-me {
     border: 1px solid green;
-    padding-bottom: 80vh;
-    display: flex;
+    padding-bottom: 20vh;
     
 
     #about-wrapper {
-      background-color: rgba(100, 100, 100, 0.6);
-      height: 150vh;
-      display: flex;
+      //background-color: rgba(100, 100, 100, 0.6);
+      position: relative;
+      padding-bottom: 20vh;
+      @media screen and (min-width: 800px){
+        display: flex;
+      }
 
       section {
-        width: 50vw;
-        position: relative;
+        //border: 1px dashed red;
+        
+        @media screen and (min-width: 800px){
+          width: 50vw;
+        }
       }
   
       .description {
-        border: 1px dashed red;
         height: fit-content;
   
         @media screen and (min-width: 800px) {
@@ -65,16 +57,20 @@
         }
   
         p{
-          position: relative;
-          font-size: 1.3rem;
-          line-height: 1.7rem;
-          letter-spacing: 0.5px;
+          font-size: 1rem;
+          line-height: 1.2rem;
+          letter-spacing: 0.2px;
           margin: 0;
           text-align: justify;
-          width: 95%;
-          padding-top: 50px;
+          width: 96%;
+          padding: 80px 2% 0 2%;
+
+          @media screen and (min-width: 800px) {
+            font-size: 1.3rem;
+            line-height: 1.7rem;
+            letter-spacing: 0.5px;
+          }
           
-  
           @media screen and (min-width: 1500px) {
             font-size: 1.5rem;
             line-height: 2rem;
@@ -84,17 +80,20 @@
       }
   
       .photo-grid {
-        border: 1px dashed red;
         height: 80vh;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(5, 1fr);
         grid-column-gap: 2px;
         grid-row-gap: 2px;
-        align-self: flex-end;
+        position: absolute;
+        width: 96vw;
+        top: 0vh;
+        left: -60vw;
   
         @media screen and (min-width: 800px) {
           padding-left: 2%;
+          align-self: flex-end;
         }
   
         span {
