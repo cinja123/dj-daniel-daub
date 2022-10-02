@@ -11,12 +11,15 @@
       </div>
     </template>
   </dock>
-  <main ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
-    <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
-    <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
-    <music-examples :videoIds="videoIds" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
+  <div ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
+    <main>
+      <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
+      <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
+      <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
+    </main>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
-  </main>
+  </div>
+  
   
 </template>
 <script setup lang="ts">
@@ -24,8 +27,18 @@ import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
 import MusicExamples from './components/MusicExamples.vue';
-import { onMounted, nextTick, ref, onBeforeUnmount} from 'vue';
+import { onMounted, nextTick, ref, onBeforeUnmount, watch} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
+import { Video } from '@/models/VideoModel';
+
+
+const screenWidth = ref(0);
+const onResize = () => {screenWidth.value = window.innerWidth;}
+onMounted(() => nextTick(() => {
+  window.addEventListener('resize', onResize);
+  onResize();
+}))
+onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
 /**
  **************************************
@@ -42,15 +55,8 @@ import locomotiveScroll from 'locomotive-scroll';
   /**
    * Define position of navbar based on window width
    */
-  onMounted(() => nextTick(() => {
-    window.addEventListener('resize', onResize);
-    onResize();
-  }))
-  onBeforeUnmount(() => window.removeEventListener('resize', onResize))
-  const onResize = () => {
-    navPosition.value = window.innerWidth > 900 ? 'right' : 'top';
-  }
   const navPosition = ref<'right' | 'top'>('right');
+  watch(screenWidth, () => navPosition.value = window.innerWidth > 900 ? 'right' : 'top')
 
   /**
    * Handle show navbar on scroll
@@ -141,7 +147,12 @@ onMounted(() => {
  **************************************
  */
 
-  const videoIds = ref(['8NRYD-hPzzM', 'sZnS-NtqLIo', 'wT4wPsBtPA4']);
+  const videos = ref<Video[]>([
+    {id: '8NRYD-hPzzM', title: 'Summer Vibes House Mix'},
+    {id: 'sZnS-NtqLIo', title: 'Funky House Mix'}, 
+    {id: 'wT4wPsBtPA4', title: 'Video Drei'}
+  ])
+  
 </script>
 <style lang="scss" scoped>
   .navBar {

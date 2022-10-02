@@ -1,30 +1,37 @@
-<template>
-  <section class="video-wrapper">
-    <YoutubeVue3 ref="youTube" :videoid="props.videoId" :loop="1" :autoplay="0" :width="props.width" :height="props.height" @paused="onVideoClick"/>
+<template>  
+  <section ref="videoWrapper" class="video-wrapper">
+    <YoutubeVue3 ref="youTube" :key="youTubeKey" 
+      :videoid="props.videoId" 
+      :loop="1" :autoplay="0"
+      :controls="1" 
+      :width="props.width" 
+      :height="props.height" 
+      @paused="onVideoClick"
+    />
     <div ref="videoLayer" class="video-layer show" @click="onLayerClick">
-      <svg class="transparent-text" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${props.width} ${props.height}`"
+      <svg class="transparent-text" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${sectionWidth} ${sectionHeight}`"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          <mask id="maskvideo" x="0" y="0" width="100%" heigth="100%">
+          <mask :id="`maskvideo-${props.videoId}`" x="0" y="0" width="100%" heigth="100%">
             <rect class="maskRect" x="0" y="0" width="100%" height="100%"></rect>
-            <text class="video" x="50%" y="250" dominant-baseline="start" text-anchor="middle">
+            <text class="video" x="50%" :y="sectionHeight - 50" dominant-baseline="start" text-anchor="middle">
               {{props.title}}
             </text>
             <circle cx="50%" cy="50%" :r="props.radius" fill="black"></circle>
           </mask>
         </defs>
-        <rect class="video" x="0" y="0" width="100%" height="100%"></rect>
+        <rect ref="maskContainer" class="video" x="0" y="0" width="100%" height="100%"></rect>
       </svg>
       <div class="play">
-        <img :src="require('@/assets/media/icons/play.svg')" alt="Play" />
+        <img :src="require('@/assets/media/icons/play.svg')" :style="`width: ${props.radius * 0.6}px;`" alt="Play" />
       </div>
     </div>
   </section>
 </template>
 <script lang="ts" setup>
   import { YoutubeVue3 } from 'youtube-vue3'
-  import { defineProps, withDefaults, nextTick, onMounted, ref } from 'vue';
+  import { defineProps, withDefaults, nextTick, onMounted, ref, onBeforeUnmount, watch } from 'vue';
 
   export interface Props{
     videoId: string;
@@ -37,8 +44,14 @@
   const props = withDefaults(defineProps<Props>(), {
     width: 480,
     height: 320,
-    radius: 60,
+    radius: 80,
   })
+
+  const youTubeKey = ref(0);
+  watch(() => props.width, () => {
+    console.log('New video width', props.width);
+    youTube.value.player.setSize(props.width, props.height);
+  });
 
   const videoLayer = ref();
   const onLayerClick = (event: Event) => {
@@ -50,6 +63,7 @@
     youTube.value.player.unMute();
   }
 
+  
   const onVideoClick = () => {
     console.log('videoclick');
     videoLayer.value.style.display = 'block';
@@ -60,12 +74,31 @@
     
   }
 
+  const maskContainer = ref();
   const youTube = ref()
   onMounted(() => {
     nextTick(() => {
+      maskContainer.value.style.mask = `url(#maskvideo-${props.videoId})`
       youTube.value.player.mute();
       youTube.value.player.playVideo();
     })
+  })
+
+  // get width and heigth for video layer
+  const videoWrapper = ref()
+  const sectionWidth = ref(props.width);
+  const sectionHeight = ref(props.height);
+  const resizeLayer = () => {
+    sectionWidth.value = videoWrapper.value.clientWidth;
+    sectionHeight.value = videoWrapper.value.clientHeight;
+  }
+  onMounted(() => nextTick(() => {
+    window.addEventListener('resize', resizeLayer);
+    window.addEventListener('load', resizeLayer);
+  }))
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', resizeLayer);
+    window.removeEventListener('load', resizeLayer);
   })
 </script>
 <style lang="scss" scoped>
@@ -73,6 +106,8 @@
     display: inline-block;
     position: relative;
     overflow: hidden;
+    text-align: center;
+    border-radius: 10px;
 
     .video-layer {
       cursor: pointer;
@@ -81,7 +116,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      border-radius: 10px;
+      overflow: hidden;
 
       .transparent-text {
         width: 100%;
@@ -110,13 +145,10 @@
 
         rect.video {
           fill: var(--main-text);
-          -webkit-mask: url(#maskvideo);
-                  mask: url(#maskvideo);
         }
       }
 
       .play {
-        
         position: absolute;
         top: 0;
         left: 0;
@@ -128,7 +160,6 @@
 
         img {
           filter: invert(100%) sepia(0%) saturate(1%) hue-rotate(226deg) brightness(103%) contrast(101%);
-          width: 50px;
         }
       }
 
