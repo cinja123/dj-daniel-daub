@@ -9,13 +9,13 @@
       @paused="onVideoClick"
     />
     <div ref="videoLayer" class="video-layer show" @click="onLayerClick">
-      <svg class="transparent-text" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${sectionWidth} ${sectionHeight}`"
+      <svg class="transparent-text" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${props.width} ${props.height}`"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <mask :id="`maskvideo-${props.videoId}`" x="0" y="0" width="100%" heigth="100%">
             <rect class="maskRect" x="0" y="0" width="100%" height="100%"></rect>
-            <text class="video" x="50%" :y="sectionHeight - 50" dominant-baseline="start" text-anchor="middle">
+            <text class="video" x="50%" :y="props.height - 50" dominant-baseline="start" text-anchor="middle">
               {{props.title}}
             </text>
             <circle cx="50%" cy="50%" :r="props.radius" fill="black"></circle>
@@ -31,7 +31,7 @@
 </template>
 <script lang="ts" setup>
   import { YoutubeVue3 } from 'youtube-vue3'
-  import { defineProps, withDefaults, nextTick, onMounted, ref, onBeforeUnmount, watch } from 'vue';
+  import { defineProps, withDefaults, nextTick, onMounted, ref, watch } from 'vue';
 
   export interface Props{
     videoId: string;
@@ -84,22 +84,10 @@
     })
   })
 
-  // get width and heigth for video layer
-  const videoWrapper = ref()
-  const sectionWidth = ref(props.width);
-  const sectionHeight = ref(props.height);
-  const resizeLayer = () => {
-    sectionWidth.value = videoWrapper.value.clientWidth;
-    sectionHeight.value = videoWrapper.value.clientHeight;
-  }
   onMounted(() => nextTick(() => {
-    window.addEventListener('resize', resizeLayer);
-    window.addEventListener('load', resizeLayer);
+    youTube.value.player.setSize(props.width, props.height);
   }))
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', resizeLayer);
-    window.removeEventListener('load', resizeLayer);
-  })
+
 </script>
 <style lang="scss" scoped>
   .video-wrapper {
@@ -119,11 +107,13 @@
       overflow: hidden;
 
       .transparent-text {
-        width: 100%;
+        //width: 100%;
         position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        //height: 100%;
         border-radius: 8px;
         transform: scale(1);
         transition: transform 1s;
