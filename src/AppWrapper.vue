@@ -16,6 +16,7 @@
       <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
       <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
+      <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
     </main>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </div>
@@ -30,6 +31,8 @@ import MusicExamples from './components/MusicExamples.vue';
 import { onMounted, nextTick, ref, onBeforeUnmount, watch} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 import { Video } from '@/models/VideoModel';
+import { Picture } from './models/PictureModel';
+import GalleryView from './components/GalleryView.vue';
 
 
 const screenWidth = ref(0);
@@ -152,6 +155,20 @@ onMounted(() => {
     {id: 'sZnS-NtqLIo', title: 'Funky House Mix'}, 
     {id: 'wT4wPsBtPA4', title: 'Charts House Mix'}
   ])
+
+  /**
+ **************************************
+ ************* Gallery ****************
+ **************************************
+ */
+
+ const gallery = ref<Picture[][]>([]);
+ for (let i = 0; i < 4; i++) {
+  gallery.value.push([]);
+  gallery.value[i].push(new Picture('danielvinyl.jpg', 'daniel vinyl'));
+  gallery.value[i].push(new Picture('daniel2.jpg', 'daniel 2'));
+  gallery.value[i].push(new Picture('daniel4.jpg', 'daniel 4'));
+ }
   
 </script>
 <style lang="scss" scoped>
