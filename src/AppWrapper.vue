@@ -98,42 +98,44 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
  **************************************
  */
 
-const scrollSection = ref(null);
-const scroll = ref<locomotiveScroll>();
-const scrollIns = null;
+  const scrollSection = ref(null);
+  const scroll = ref<locomotiveScroll>();
+  const scrollIns = null;
 
-const initLocoScroll = () => {
-  scroll.value = new locomotiveScroll({
-    el: scrollSection.value,
-    smooth: true,
-    getDirection: true,
-    smartphone: {
-      breakpoint: 0,
+  const initLocoScroll = () => {
+    scroll.value = new locomotiveScroll({
+      el: scrollSection.value,
       smooth: true,
       getDirection: true,
-    },
-    tablet: {
-      breakpoint: 0,
-      smooth: true,
-      getDirection: true,
-    },
-  });
-}
+      smartphone: {
+        breakpoint: 0,
+        smooth: true,
+        getDirection: true,
+      },
+      tablet: {
+        breakpoint: 0,
+        smooth: true,
+        getDirection: true,
+      },
+    });
+  }
 
-let timeoutidRendered = 0;
-const updateScroll = () => {
-  window.clearTimeout(timeoutidRendered);
-  timeoutidRendered = setTimeout(() => {
-    scroll.value.update();
-  }, 100)
-}
+  let timeoutidRendered = 0;
+  const updateScroll = () => {
+    console.log('rendered');
+    window.clearTimeout(timeoutidRendered);
+    timeoutidRendered = setTimeout(() => {
+      console.log('update scroller');
+      scroll.value.update();
+    }, 700)
+  }
 
-onMounted(() => {
-  nextTick(() => {
-    initLocoScroll();
-    scrollDetector();
+  onMounted(() => {
+    nextTick(() => {
+      initLocoScroll();
+      scrollDetector();
+    })
   })
-})
 
 
 /**
@@ -162,13 +164,13 @@ onMounted(() => {
  **************************************
  */
 
- const gallery = ref<Picture[][]>([]);
- for (let i = 0; i < 4; i++) {
-  gallery.value.push([]);
-  gallery.value[i].push(new Picture('danielvinyl.jpg', 'daniel vinyl'));
-  gallery.value[i].push(new Picture('daniel2.jpg', 'daniel 2'));
-  gallery.value[i].push(new Picture('daniel4.jpg', 'daniel 4'));
- }
+  const gallery = ref<Picture[][]>([]);
+  for (let i = 0; i < 4; i++) {
+    gallery.value.push([]);
+    gallery.value[i].push(new Picture('danielvinyl.jpg', 'daniel vinyl'));
+    gallery.value[i].push(new Picture('daniel2.jpg', 'daniel 2'));
+    gallery.value[i].push(new Picture('daniel4.jpg', 'daniel 4'));
+  }
   
 </script>
 <style lang="scss" scoped>

@@ -144,7 +144,7 @@
       .black-bg {
         height: 150vh; 
         width: 100vw; 
-        background-color: #000;
+        background-color: var(--main-bg);
         margin-top: 100vh;
       }
     }

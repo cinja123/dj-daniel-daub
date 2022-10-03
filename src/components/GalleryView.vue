@@ -1,7 +1,9 @@
 <template>
   <article id="gallery">
     <div class="gallery-img-container">
-      <div v-for="(pictures, index) in props.pictures" :key="`${index}-pictures`" class="gallery-line">
+      <div v-for="(pictures, index) in props.pictures" :key="`${index}-pictures`" class="gallery-line"
+        data-scroll :data-scroll-speed="index%2 === 0 ? 1 : -1"
+      >
         <img v-for="(pic, picIndex) in pictures" :key="`${index}-${picIndex}`" 
           class="gallery-img"
           :src="require('@/assets/media/images/' + pic.name)"
