@@ -28,11 +28,12 @@ import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
 import MusicExamples from './components/MusicExamples.vue';
+import GalleryView from './components/GalleryView.vue';
 import { onMounted, nextTick, ref, onBeforeUnmount, watch} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 import { Video } from '@/models/VideoModel';
 import { Picture } from './models/PictureModel';
-import GalleryView from './components/GalleryView.vue';
+
 
 
 const screenWidth = ref(0);
