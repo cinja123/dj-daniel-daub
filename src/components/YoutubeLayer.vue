@@ -6,6 +6,7 @@
       :controls="1" 
       :width="props.width" 
       :height="props.height" 
+      style="border-radius: 10px;"
       @paused="onVideoClick"
     />
     <div ref="videoLayer" class="video-layer show" @click="onLayerClick">
@@ -56,6 +57,7 @@
   const videoLayer = ref();
   const onLayerClick = (event: Event) => {
     console.log(event, videoLayer.value);
+    videoLayer.value.parentElement.style.overflow = 'hidden';
     videoLayer.value.classList.remove('show');
     videoLayer.value.classList.add('hide');
     youTube.value.player.playVideo();
@@ -70,7 +72,9 @@
     setTimeout(() => {
       videoLayer.value.classList.add('show');
       videoLayer.value.classList.remove('hide');
+      setTimeout(() => videoLayer.value.parentElement.style.overflow = 'visible', 1000);
     }, 500)
+    
     
   }
 
@@ -93,7 +97,7 @@
   .video-wrapper {
     display: inline-block;
     position: relative;
-    overflow: hidden;
+    
     text-align: center;
     border-radius: 10px;
 
@@ -104,17 +108,15 @@
       left: 0;
       right: 0;
       bottom: 0;
-      overflow: hidden;
+      border-radius: 10px;
 
       .transparent-text {
-        //width: 100%;
         position: absolute;
         top: -5px;
         left: -5px;
         right: -5px;
-        bottom: -5px;
-        //height: 100%;
-        border-radius: 8px;
+        bottom: -51px;
+        border-radius: 10px;
         transform: scale(1);
         transition: transform 1s;
         will-change: transform;

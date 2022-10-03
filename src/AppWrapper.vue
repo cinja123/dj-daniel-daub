@@ -150,7 +150,7 @@ onMounted(() => {
   const videos = ref<Video[]>([
     {id: '8NRYD-hPzzM', title: 'Summer Vibes House Mix'},
     {id: 'sZnS-NtqLIo', title: 'Funky House Mix'}, 
-    {id: 'wT4wPsBtPA4', title: 'Video Drei'}
+    {id: 'wT4wPsBtPA4', title: 'Charts House Mix'}
   ])
   
 </script>
