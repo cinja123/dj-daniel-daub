@@ -6,9 +6,11 @@
         <!-- <ProgressSteps :items="props.items"/> -->
       </div>
       <div class="contact-body">
-        <KeepAlive>
-          <component :is="formInView" @onNextClick="changePage(1)" @onPrevClick="changePage(-1)" @onSend="submitForms"></component>
-        </KeepAlive>
+        <Transition :name="`transition${transitionMove}`">
+          <KeepAlive>
+            <component :is="formInView" @onNextClick="changePage(1)" @onPrevClick="changePage(-1)" @onSend="submitForms"></component>
+          </KeepAlive>
+        </Transition>
 
       </div>
     </div>
@@ -23,9 +25,11 @@
   }>()
 
   const currentPage = ref(0);
-  const formInView = shallowRef(props.items[0].component)
+  const formInView = shallowRef(props.items[0].component);
+  const transitionMove = ref<'right'|'left'>('left');
   const changePage = (delta: -1|1) => {
     if((delta === 1 && currentPage.value < props.items.length) || (delta === -1 && currentPage.value > 0)){
+      transitionMove.value = delta > 0 ? 'left' : 'right';
       currentPage.value += delta;
       formInView.value = props.items[currentPage.value].component;
     }
@@ -56,5 +60,25 @@
       }
     }
     
+  }
+
+  .transitionleft-enter-active,
+  .transitionleft-leave-active,
+  .transitionright-enter-active,
+  .transitionright-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .transitionright-enter-from{
+    transform: translateX(-100vw);
+  }
+  .transitionright-leave-to {
+    transform: translateX(100vw);
+  }
+  .transitionleft-enter-from{
+    transform: translateX(100vw);
+  }
+  .transitionleft-leave-to {
+    transform: translateX(-100vw);
   }
 </style>

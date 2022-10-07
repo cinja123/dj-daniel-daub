@@ -193,7 +193,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     {label: 'test2', component: locationForm, icon: ''},
     {label: 'test3', component: userForm, icon: ''}
   ]
-  
+
 </script>
 <style lang="scss" scoped>
   .navBar {
