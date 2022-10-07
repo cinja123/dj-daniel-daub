@@ -189,9 +189,9 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   const userForm = markRaw(UserForm);
 
   const contactItems = [
-    {label: 'test', component: eventForm, icon: ''},
-    {label: 'test2', component: locationForm, icon: ''},
-    {label: 'test3', component: userForm, icon: ''}
+    {label: 'test', component: eventForm, icon: 'eventIcon.svg'},
+    {label: 'test2', component: locationForm, icon: 'eventLocationIcon.svg'},
+    {label: 'test3', component: userForm, icon: 'userIcon.svg'}
   ]
 
 </script>

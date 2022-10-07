@@ -3,7 +3,7 @@
     <div class="contact-card">
       <div class="contact-header">
         <h3>Eventanfrage</h3>
-        <!-- <ProgressSteps :items="props.items"/> -->
+        <ProgressSteps :items="props.items" :progress="currentPage"/>
       </div>
       <div class="contact-body">
         <Transition :name="`transition${transitionMove}`">
@@ -57,7 +57,7 @@
       padding: 0 10px 5vh 10px;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow: hiddengit;
 
       h3 {
         text-align: center;
