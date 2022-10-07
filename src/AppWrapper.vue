@@ -17,6 +17,7 @@
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
       <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
       <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
+      <contact-form :items="contactItems" data-scroll-section/>
     </main>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </div>
@@ -29,10 +30,14 @@ import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
 import MusicExamples from './components/MusicExamples.vue';
 import GalleryView from './components/GalleryView.vue';
-import { onMounted, nextTick, ref, onBeforeUnmount, watch} from 'vue';
+import { onMounted, nextTick, ref, onBeforeUnmount, watch, markRaw} from 'vue';
 import locomotiveScroll from 'locomotive-scroll';
 import { Video } from '@/models/VideoModel';
 import { Picture } from './models/PictureModel';
+import ContactForm from './components/ContactForm.vue';
+import EventForm from '@/components/forms/EventForm.vue';
+import LocationForm from '@/components/forms/LocationForm.vue';
+import UserForm from '@/components/forms/UserForm.vue';
 
 
 
@@ -172,6 +177,22 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     gallery.value[i].push(new Picture('daniel2.jpg', 'daniel 2'));
     gallery.value[i].push(new Picture('daniel4.jpg', 'daniel 4'));
   }
+
+ /**
+**************************************
+************* Contact ****************
+**************************************
+*/
+
+  const eventForm = markRaw(EventForm);
+  const locationForm = markRaw(LocationForm);
+  const userForm = markRaw(UserForm);
+
+  const contactItems = [
+    {label: 'test', component: eventForm, icon: ''},
+    {label: 'test2', component: locationForm, icon: ''},
+    {label: 'test3', component: userForm, icon: ''}
+  ]
   
 </script>
 <style lang="scss" scoped>
