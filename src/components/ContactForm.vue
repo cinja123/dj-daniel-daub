@@ -8,7 +8,7 @@
       <div class="contact-body">
         <Transition :name="`transition${transitionMove}`">
           <KeepAlive>
-            <component :is="formInView" @onNextClick="changePage(1)" @onPrevClick="changePage(-1)" @onSend="submitForms"></component>
+            <component :is="formInView" @onNextClick="changePage(1)" @onPrevClick="changePage(-1)" @onSend="submitForms" class="form-component"></component>
           </KeepAlive>
         </Transition>
 
@@ -53,10 +53,29 @@
       background-color: var(--main-text);
       color: var(--main-bg);
       margin: 10vh 0;
-      min-width: calc(100vw - 24px);
+      width: calc(100vw - 44px);
+      padding: 0 10px 5vh 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
 
       h3 {
         text-align: center;
+        flex: 0 1 auto;
+      }
+
+      .contact-body {
+        flex: 1 1 auto;
+        position: relative;
+
+        .form-component {
+          border: 1px solid coral;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
       }
     }
     

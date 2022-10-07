@@ -1,7 +1,7 @@
 <template>
   <section class="user-form">
     <h4>User</h4>
-    <FormButtons :previous="true" :send="true" @clickLeft="emit('onPrevClick')" @clickSend="send()"></FormButtons>
+    <FormButtons :previous="true" :send="true" @clickLeft="emit('onPrevClick')" @clickSend="send()" class="buttons"></FormButtons>
   </section>
 </template>
 <script lang="ts" setup>
@@ -25,5 +25,14 @@
  
 </script>
 <style lang="scss" scoped>
+.user-form {
+  position: relative;
+
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
 
 </style>

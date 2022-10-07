@@ -1,7 +1,7 @@
 <template>
   <section class="location-form">
     <h4>Location</h4>
-    <FormButtons :next="true" :previous="true" @clickRight="nextPage" @clickLeft="emit('onPrevClick')"></FormButtons>
+    <FormButtons :next="true" :previous="true" @clickRight="nextPage" @clickLeft="emit('onPrevClick')" class="buttons"></FormButtons>
   </section>
 </template>
 <script lang="ts" setup>
@@ -25,5 +25,13 @@
  
 </script>
 <style lang="scss" scoped>
+.location-form {
+  position: relative;
 
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
 </style>

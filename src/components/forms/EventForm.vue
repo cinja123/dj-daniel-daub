@@ -1,7 +1,7 @@
 <template>
   <section class="event-form">
     <h4>Event</h4>
-    <FormButtons :next="true" @clickRight="nextPage"></FormButtons>
+    <FormButtons class="buttons" :next="true" @clickRight="nextPage"></FormButtons>
   </section>
 </template>
 <script lang="ts" setup>
@@ -24,5 +24,13 @@
   }
 </script>
 <style lang="scss" scoped>
+  .event-form {
+    position: relative;
 
+    .buttons {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
 </style>
