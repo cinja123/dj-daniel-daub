@@ -1,0 +1,22 @@
+{
+  "occassions": [
+    {"name": "Hochzeit"},
+    {"name": "Geburtstag"},
+    {"name": "Festival"},
+    {"name": "Club"},
+    {"name": "Firmenfeier"},
+    {"name": "Sonstiges"}
+  ],
+  "numbersGuests": [
+    {"displayName": "50 Gäste", "value": 50},
+    {"displayName": "100 Gäste", "value": 100},
+    {"displayName": "150 Gäste", "value": 150},
+    {"displayName": "200 Gäste", "value": 200},
+    {"displayName": "250+ Gäste", "value": 250}
+  ],
+  "durations": [
+    {"displayName": "6 Stunden", "value": 6},
+    {"displayName": "9 Stunden", "value": 9},
+    {"displayName": "Open End", "value": 12}
+  ]
+}

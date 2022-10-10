@@ -43,7 +43,7 @@
 </script>
 <style lang="scss" scoped>
   #contact {
-    min-height: 100vh;
+    min-height: 120vh;
     border: 1px solid green;
     display: flex;
     justify-content: center;
@@ -57,7 +57,7 @@
       padding: 0 10px 5vh 10px;
       display: flex;
       flex-direction: column;
-      overflow: hiddengit;
+      overflow-x: clip;
 
       h3 {
         text-align: center;
