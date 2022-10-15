@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label :for="props.label">{{props.label}}:</label>
+    <label :for="props.id">{{props.label}}:</label>
     <Dropdown v-if="props.type === 'dropdown'" class="dropdown" 
-      :id="props.label" 
+      :id="props.id" 
       v-model="selected" 
       :options="props.options" 
       :optionLabel="props.optionLabel||null" 
@@ -28,6 +28,7 @@
     options?: any[];
     optionLabel?: string;
     placeholder?: string;
+    id?: string;
   }>()
 
   const today = new Date();

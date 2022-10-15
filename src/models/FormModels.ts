@@ -18,18 +18,18 @@ export class FormItem {
 
 
 export class EventData {
-  occassion: string
-  date: string
-  numberGuests: number
-  duration: number
-  music: MusicGenre[]
+  occassion: string | undefined
+  date: string | undefined
+  numberGuests: number | undefined
+  duration: number | undefined
+  music: MusicGenre[] | undefined
 
   constructor (occassion?: string, date?: string, numberGuests?: number, duration?: number, music?: MusicGenre[]){
-    this.occassion = occassion || '';
-    this.date = date || '';
-    this.numberGuests = numberGuests || 0;
-    this.duration = duration || 0;
-    this.music = music || [];
+    this.occassion = occassion;
+    this.date = date;
+    this.numberGuests = numberGuests;
+    this.duration = duration;
+    this.music = music;
   }
 }
 
