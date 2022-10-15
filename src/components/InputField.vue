@@ -1,7 +1,14 @@
 <template>
   <div>
     <label :for="props.label">{{props.label}}:</label>
-    <Dropdown v-if="props.type === 'dropdown'" class="dropdown" :id="props.label" v-model="selected" :options="props.options" :optionLabel="props.optionLabel||null" :placeholder="props.placeholder||''" />
+    <Dropdown v-if="props.type === 'dropdown'" class="dropdown" 
+      :id="props.label" 
+      v-model="selected" 
+      :options="props.options" 
+      :optionLabel="props.optionLabel||null" 
+      :placeholder="props.placeholder||''"
+      scrollHeight="400px"
+    />
     <!-- <Calendar v-if="props.type === 'date'" class="date-picker" v-model="selected" appendTo="self" dateFormat="dd.mm.y" :showTime="false" :minDate="tomorrow" :placeholder="props.placeholder||''" /> -->
     <input v-if="props.type === 'date'" type="date" :id="props.label" :name="props.label" v-model="selected" :min="tomorrow.toISOString().split('T')[0]">
   </div>
@@ -31,6 +38,7 @@
       return props.selected;
     },
     set: (newValue) => {
+      console.log('update', newValue);
       emit('update:selected', newValue);
     }
   })

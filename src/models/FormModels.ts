@@ -1,14 +1,14 @@
 export class FormItem {
   label: string
-  selected: any
+  selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music'
   options: any[]
   type: 'dropdown' | 'date' | 'text'
   placeholder: string
   optionLabel: string | undefined
 
-  constructor(label?: string, selected?: any, options?: any[], type?: 'dropdown' | 'date' | 'text', placeholder?: string, optionLabel?: string){
+  constructor(selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music', label?: string, options?: any[], type?: 'dropdown' | 'date' | 'text', placeholder?: string, optionLabel?: string){
     this.label = label || '';
-    this.selected = selected || null;
+    this.selectedKey = selectedKey;
     this.options = options || [];
     this.type = type || 'text';
     this.placeholder = placeholder || '';

@@ -5,7 +5,7 @@
       <InputField v-for="(item, index) in formItems" :key="index"
         :type="item.type"
         :label="item.label"
-        v-model:selected="item.selected"
+        v-model:selected="eventData[item.selectedKey]"
         :options="item.options"
         :optionLabel="item.optionLabel"
         :placeholder="item.placeholder"
@@ -21,7 +21,7 @@
   </section>
 </template>
 <script lang="ts" setup>
-  import { defineEmits, onMounted, ref } from 'vue';
+  import { defineEmits, ref } from 'vue';
   import FormButtons from '../FormButtons.vue';
   import * as eventFormData from '@/assets/data/eventFormData.json';
   import InputField from '@/components/InputField.vue';
@@ -35,11 +35,12 @@
   const numbersGuests = ref<{displayName: string, value: number}[]>(eventFormData.numbersGuests);
   const durations = ref<{displayName: string, value: number}[]>(eventFormData.durations);
   const eventData = ref<EventData>(new EventData());
+  // const occassion = ref<{name: string}>();
   const formItems: FormItem[] = [
-    new FormItem('Anlass*', eventData.value.occassion, occassions.value, 'dropdown', 'Anlass auswählen', 'name'),
-    new FormItem('Datum*', eventData.value.date, undefined, 'date'),
-    new FormItem('Anzahl Gäste*', eventData.value.numberGuests, numbersGuests.value, 'dropdown', 'Anzahl Gäste auswählen', 'displayName'),
-    new FormItem('Musikdauer*', eventData.value.duration, durations.value, 'dropdown', 'Musikdauer', 'displayName')
+    new FormItem('occassion', 'Anlass*', occassions.value, 'dropdown', 'Anlass auswählen', 'name'),
+    new FormItem('date', 'Datum*', undefined, 'date'),
+    new FormItem('numberGuests', 'Anzahl Gäste*', numbersGuests.value, 'dropdown', 'Anzahl Gäste auswählen', 'displayName'),
+    new FormItem('duration','Musikdauer*', durations.value, 'dropdown', 'Musikdauer', 'displayName')
   ];
 
   const validateData = (): boolean => {
