@@ -1,38 +1,34 @@
 <template>
   <section class="event-form">
-    <h4>Event</h4>
     <form action="">
       <div v-for="(item, index) in formItems" :key="index">
         <InputField 
+          :class="(v$[item.selectedKey].$invalid || v$[item.selectedKey].$pending.$response) && validated ? 'invalid' : ''"
           :type="item.type"
           :label="item.label"
-          v-model:selected="eventData[item.selectedKey]"
+          v-model:selected="v$[item.selectedKey].$model"
           :options="item.options"
           :optionLabel="item.optionLabel"
           :placeholder="item.placeholder"
           :id="item.selectedKey"
-        ></InputField>
-        <p v-if="v$[item.selectedKey].$invalid || v$[item.selectedKey].$pending.$response">{{v$[item.selectedKey].required.$message.replace('Value', item.label.replaceAll('*', ''))}}</p>
+        >
+          <template #errorMessage>
+            <p class="error-message">{{v$[item.selectedKey]?.$silentErrors?.length > 0 ? v$[item.selectedKey].$silentErrors[0].$message : 'no' }}</p>
+          </template>
+        </InputField>
       </div>
-      
-      <!-- <InputField
-        type="date"
-        label="Datum*"
-        v-model:selected=""
-        placeholder="DD.MM.YY"
-      ></InputField> -->
     </form>
     <FormButtons class="buttons" :next="true" @clickRight="nextPage"></FormButtons>
   </section>
 </template>
 <script lang="ts" setup>
-  import { defineEmits, reactive, ref } from 'vue';
+  import { defineEmits, ref } from 'vue';
   import FormButtons from '../FormButtons.vue';
   import * as eventFormData from '@/assets/data/eventFormData.json';
   import InputField from '@/components/InputField.vue';
   import { EventData, FormItem } from '@/models/FormModels';
   import { useVuelidate } from '@vuelidate/core';
-  import { required } from '@vuelidate/validators';
+  import { required, helpers } from '@vuelidate/validators';
 
   const emit = defineEmits<{
     (e: 'onNextClick',): void;
@@ -41,31 +37,35 @@
   const occassions = ref<{name: string}[]>(eventFormData.occassions);
   const numbersGuests = ref<{displayName: string, value: number}[]>(eventFormData.numbersGuests);
   const durations = ref<{displayName: string, value: number}[]>(eventFormData.durations);
+  const genres = ref<{displayName: string, value: string}[]>(eventFormData.musicGenres);
   const eventData = ref<EventData>(new EventData());
 
   const formItems: FormItem[] = [
     new FormItem('occassion', 'Anlass*', occassions.value, 'dropdown', 'Anlass auswählen', 'name'),
     new FormItem('date', 'Datum*', undefined, 'date'),
     new FormItem('numberGuests', 'Anzahl Gäste*', numbersGuests.value, 'dropdown', 'Anzahl Gäste auswählen', 'displayName'),
-    new FormItem('duration','Musikdauer*', durations.value, 'dropdown', 'Musikdauer', 'displayName')
+    new FormItem('duration','Musikdauer*', durations.value, 'dropdown', 'Musikdauer', 'displayName'),
+    new FormItem('music', 'Musikgenre', genres.value, 'chips', undefined, 'displayName')
   ];
 
+  const minDateVal = (newDate: string) => newDate > new Date().toISOString();
+
   const validationRules = {
-    occassion: { required, $autoDirty: true },
-    date: { required },
-    numberGuests: { required },
-    duration: { required },
+    occassion: { required: helpers.withMessage('Anlass auswählen', required) },
+    date: { required: helpers.withMessage('Datum auswählen', required), minDateVal: helpers.withMessage('Datum liegt in Vergangenheit', minDateVal) },
+    numberGuests: { required: helpers.withMessage('Anzahl Gäste auswählen', required) },
+    duration: { required: helpers.withMessage('Dauer auswählen', required) },
+    music: {}
   }
 
   const v$ = useVuelidate(validationRules, eventData);
-
-  const validateData = (): boolean => {
+ 
+  const validated = ref(false);
+  const nextPage = async() => {
+    validated.value = true;
+    const isFormValid = await v$.value.$validate();
     console.log('check event data', v$.value.occassion);
-    return true
-  }
-
-  const nextPage = () => {
-    if (validateData()) {
+    if (isFormValid) {
       emit('onNextClick');
     }
   }
@@ -78,6 +78,10 @@
       position: absolute;
       bottom: 0;
       width: 100%;
+    }
+
+    .error-message{
+      margin: 0;
     }
   }
 </style>

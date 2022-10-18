@@ -18,5 +18,11 @@
     {"displayName": "6 Stunden", "value": 6},
     {"displayName": "9 Stunden", "value": 9},
     {"displayName": "Open End", "value": 12}
+  ],
+  "musicGenres": [
+    {"displayName": "Hip Hop", "value": "hipHop"},
+    {"displayName": "Hip Hop 2", "value": "hipHop2"},
+    {"displayName": "Hip Hop 3", "value": "hipHop3"},
+    {"displayName": "Hip Hop 4", "value": "hipHop4"}
   ]
 }

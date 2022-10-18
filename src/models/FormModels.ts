@@ -2,11 +2,11 @@ export class FormItem {
   label: string
   selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music'
   options: any[]
-  type: 'dropdown' | 'date' | 'text'
+  type: 'dropdown' | 'date' | 'text' | 'chips'
   placeholder: string
   optionLabel: string | undefined
 
-  constructor(selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music', label?: string, options?: any[], type?: 'dropdown' | 'date' | 'text', placeholder?: string, optionLabel?: string){
+  constructor(selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music', label?: string, options?: any[], type?: 'dropdown' | 'date' | 'text' | 'chips', placeholder?: string, optionLabel?: string){
     this.label = label || '';
     this.selectedKey = selectedKey;
     this.options = options || [];

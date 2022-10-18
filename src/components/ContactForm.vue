@@ -67,10 +67,10 @@
       .contact-body {
         flex: 1 1 auto;
         position: relative;
+        margin: 30px 0 0 0;
 
         .form-component {
-          border: 1px solid coral;
-          position: absolute;
+          position: relative;
           top: 0;
           bottom: 0;
           left: 0;

@@ -15,7 +15,7 @@
     <main>
       <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
-      <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
+      <!-- <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples> -->
       <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
       <contact-form :items="contactItems" data-scroll-section/>
     </main>
