@@ -25,9 +25,23 @@
   .chip {
     border-radius: 8px;
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid var(--main-bg);
     cursor: pointer;
     padding: 0.75rem;
     margin: 7px;
+    color: var(--main-bg);
+    background-color: var(--main-text);
+    transition: all .3s all;
+
+    &.selected {
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      background-color: rgba(255,140,0,0.1);
+    }
+
+    &:hover {
+      color: var(--main-text);
+      background-color: var(--main-bg);
+    }
   }
 </style>

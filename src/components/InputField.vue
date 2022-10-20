@@ -1,7 +1,7 @@
 <template>
   <div class="input-field">
     <label :for="props.id">{{props.label}}:</label>
-    <Dropdown v-if="props.type === 'dropdown'" class="dropdown" 
+    <Dropdown v-if="props.type === 'dropdown'" class="dropdown" appendTo="self"
       :id="props.id" 
       v-model="selected" 
       :options="props.options" 
