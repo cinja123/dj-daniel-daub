@@ -14,6 +14,7 @@
       v-model:selected="selected"
       :options="props.options!"
       :optionLabel="props.optionLabel || ''"
+      placeholder="weitere..."
     ></ChipsInput>
     <div class="error">
       <slot name="errorMessage"></slot>

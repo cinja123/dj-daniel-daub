@@ -7,6 +7,7 @@ import Carousel from 'primevue/carousel';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
+import Chips from 'primevue/chips';
 
 
 createApp(App)
@@ -17,4 +18,5 @@ createApp(App)
 .component('InputText', InputText)
 .component('Dropdown', Dropdown)
 .component('Calendar', Calendar)
+.component('Chips', Chips)
 .mount('#app')

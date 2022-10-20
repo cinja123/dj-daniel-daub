@@ -6,6 +6,7 @@
 @import "assets/style/main.scss";
 @import "assets/style/locomotiveScroll.scss";
 @import 'assets/style/dropdown.scss';
+@import 'assets/style/chipsinput.scss';
 
 #app {
   color: var(--main-text);

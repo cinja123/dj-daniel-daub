@@ -17,7 +17,7 @@
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
       <!-- <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples> -->
       <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
-      <contact-form :items="contactItems" data-scroll-section/>
+      <contact-form :items="contactItems" style="z-index: 10; position: relative;" data-scroll-section/>
     </main>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
   </div>
@@ -231,4 +231,5 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     }
 
   }
+
 </style>
