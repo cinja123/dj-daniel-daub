@@ -3,7 +3,7 @@
     <form action="">
       <div v-for="(item, index) in formItems" :key="index">
         <InputField 
-          :class="(v$[item.selectedKey].$invalid || v$[item.selectedKey].$pending.$response) && validated ? 'invalid' : ''"
+          :class="(v$[item.selectedKey].$invalid || v$[item.selectedKey].$pending) && validated ? 'invalid' : ''"
           :type="item.type"
           :label="item.label"
           v-model:selected="v$[item.selectedKey].$model"
@@ -31,7 +31,7 @@
   import { required, helpers } from '@vuelidate/validators';
 
   const emit = defineEmits<{
-    (e: 'onNextClick',): void;
+    (e: 'onNextClick', formData: EventData): void;
   }>()
 
   const occassions = ref<{name: string}[]>(eventFormData.occassions);
@@ -66,17 +66,14 @@
     const isFormValid = await v$.value.$validate();
     console.log('check event data', v$.value.occassion);
     if (isFormValid) {
-      emit('onNextClick');
+      emit('onNextClick', eventData.value);
     }
   }
 </script>
 <style lang="scss" scoped>
   .event-form {
-    position: relative;
 
     .buttons {
-      position: absolute;
-      bottom: -10px;
       width: 100%;
     }
 

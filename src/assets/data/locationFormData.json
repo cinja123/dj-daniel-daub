@@ -1,0 +1,7 @@
+{
+  "eventTechnology": [
+    {"name": "vorhanden", "value": true},
+    {"name": "nicht bekannt", "value": null},
+    {"name": "nicht vorhanden", "value": false}
+  ]
+}

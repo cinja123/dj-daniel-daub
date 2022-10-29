@@ -7,6 +7,7 @@
 @import "assets/style/locomotiveScroll.scss";
 @import 'assets/style/dropdown.scss';
 @import 'assets/style/chipsinput.scss';
+@import 'assets/style/selectbutton.scss';
 
 #app {
   color: var(--main-text);

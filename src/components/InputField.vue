@@ -9,13 +9,18 @@
       :placeholder="props.placeholder||''"
       scrollHeight="400px"
     />
-    <input v-else-if="props.type === 'date' && props.options" :class="props.selected === undefined || props.selected === '' ? 'placeholder' : ''" type="date" :id="props.label" :name="props.label" v-model="selected" :min="tomorrow.toISOString().split('T')[0]">
+    <input v-else-if="props.type === 'date' && props.options" :id="props.id" :class="props.selected === undefined || props.selected === '' ? 'placeholder' : ''" type="date" :name="props.label" v-model="selected" :min="tomorrow.toISOString().split('T')[0]">
     <ChipsInput v-else-if="props.type === 'chips'"
       v-model:selected="selected"
+      :id="props.id" 
       :options="props.options!"
       :optionLabel="props.optionLabel || ''"
       placeholder="weitere..."
     ></ChipsInput>
+    <InputText v-else-if="props.type === 'text'" :id="props.id"  type="text" v-model="selected" />
+    <InputMask v-else-if="props.type === 'zip'" :id="props.id" v-model="selected" mask="99999" :placeholder="props.placeholder" />
+    <SelectButton v-else-if="props.type === 'selectbutton'" v-model="selected" :options="props.options" :optionLabel="props.optionLabel" :unselectable="false" />
+    <div v-else></div>
     <div class="error">
       <slot name="errorMessage"></slot>
     </div>
@@ -31,7 +36,7 @@
   }>()
 
   const props = defineProps<{
-    type: 'dropdown' | 'date' | 'text' | 'chips';
+    type: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton';
     label: string;
     selected?: any | any[];
     options?: any[];

@@ -52,14 +52,14 @@
       border-radius: 8px;
       background-color: var(--main-text);
       color: var(--main-bg);
-      margin: 10vh 0;
+      margin: 15vh 0;
       width: calc(100vw - 44px);
       padding: 0 10px 5vh 10px;
       display: flex;
       flex-direction: column;
       overflow-x: clip;
 
-      h3 {
+      .contact-header {
         text-align: center;
         flex: 0 1 auto;
       }
@@ -70,11 +70,11 @@
         margin: 30px 0 0 0;
 
         .form-component {
-          position: relative;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
         }
       }
     }
@@ -86,6 +86,18 @@
   .transitionright-enter-active,
   .transitionright-leave-active {
     transition: all 0.5s ease;
+  }
+
+  .transitionleft-enter-from,
+  .transitionleft-leave-to,
+  .transitionright-enter-from,
+  .transitionright-leave-to {
+    &.form-component {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
   }
 
   .transitionright-enter-from{

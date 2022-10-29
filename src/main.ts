@@ -5,9 +5,11 @@ import PrimeVue from 'primevue/config';
 import Dock from 'primevue/dock';
 import Carousel from 'primevue/carousel';
 import InputText from 'primevue/inputtext';
+import InputMask from 'primevue/inputmask';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
 import Chips from 'primevue/chips';
+import SelectButton from 'primevue/selectbutton';
 
 
 createApp(App)
@@ -19,4 +21,6 @@ createApp(App)
 .component('Dropdown', Dropdown)
 .component('Calendar', Calendar)
 .component('Chips', Chips)
+.component('InputMask', InputMask)
+.component('SelectButton', SelectButton)
 .mount('#app')
