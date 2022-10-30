@@ -28,7 +28,7 @@
   import { LocationData, FormItem } from '@/models/FormModels';
   import * as locationFormData from '@/assets/data/locationFormData.json';
   import { useVuelidate } from '@vuelidate/core';
-  import { required, helpers, minLength, maxLength, numeric } from '@vuelidate/validators';
+  import { required, helpers, minLength, maxLength } from '@vuelidate/validators';
 
   const emit = defineEmits<{
     (e: 'onNextClick', formData: LocationData): void;

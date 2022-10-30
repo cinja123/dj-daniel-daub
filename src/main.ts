@@ -9,6 +9,7 @@ import InputMask from 'primevue/inputmask';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
 import Chips from 'primevue/chips';
+import TextArea from 'primevue/textarea';
 import SelectButton from 'primevue/selectbutton';
 
 
@@ -23,4 +24,5 @@ createApp(App)
 .component('Chips', Chips)
 .component('InputMask', InputMask)
 .component('SelectButton', SelectButton)
+.component('Textarea', TextArea)
 .mount('#app')

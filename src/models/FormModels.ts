@@ -2,12 +2,11 @@ export class FormItem {
   label: string
   selectedKey: string
   options: any[]
-  type: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton'
+  type: string
   placeholder: string
   optionLabel: string | undefined
 
-  constructor(selectedKey: 'occassion' | 'date' | 'numberGuests' | 'duration' | 'music' | 'locationName' | 'zipCode' | 'city' | 'eventTechnology', 
-  label?: string, options?: any[], type?: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton', placeholder?: string, optionLabel?: string){
+  constructor(selectedKey: string, label?: string, options?: any[], type?: string, placeholder?: string, optionLabel?: string){
     this.label = label || '';
     this.selectedKey = selectedKey;
     this.options = options || [];
@@ -55,4 +54,23 @@ export class LocationData {
   zipCode: number | undefined = undefined;
   city = '';
   eventTechnology: {name: string; value: boolean | null} = {name: 'nicht bekannt', value: null};
+}
+
+
+/**
+ * Data that is needed to describe a User
+ */
+export class UserData {
+  firstname: string
+  lastname: string
+  email: string
+  phone: string
+  information: string | undefined
+  constructor(firstname: string, lastname: string, email: string, phone: string, information?: string){
+    this.firstname = firstname;
+    this.lastname= lastname;
+    this.email = email;
+    this.phone = phone;
+    this.information = information;
+  }
 }

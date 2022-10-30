@@ -1,6 +1,6 @@
 <template>
   <div class="input-field">
-    <label :for="props.id">{{props.label}}:</label>
+    <label v-if="props.label" :for="props.id">{{props.label}}:</label>
     <Dropdown v-if="props.type === 'dropdown'" class="dropdown" appendTo="self"
       :id="props.id" 
       v-model="selected" 
@@ -17,9 +17,10 @@
       :optionLabel="props.optionLabel || ''"
       placeholder="weitere..."
     ></ChipsInput>
-    <InputText v-else-if="props.type === 'text'" :id="props.id"  type="text" v-model="selected" />
+    <InputText v-else-if="props.type === 'text'" :id="props.id"  type="text" v-model="selected" :placeholder="props?.placeholder"/>
     <InputMask v-else-if="props.type === 'zip'" :id="props.id" v-model="selected" mask="99999" :placeholder="props.placeholder" />
     <SelectButton v-else-if="props.type === 'selectbutton'" v-model="selected" :options="props.options" :optionLabel="props.optionLabel" :unselectable="false" />
+    <Textarea v-else-if="props.type === 'textarea'" class="textarea" v-model="selected" :autoResize="true" rows="5" :placeholder="props?.placeholder" />
     <div v-else></div>
     <div class="error">
       <slot name="errorMessage"></slot>
@@ -36,8 +37,8 @@
   }>()
 
   const props = defineProps<{
-    type: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton';
-    label: string;
+    type: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton' | 'textarea';
+    label?: string;
     selected?: any | any[];
     options?: any[];
     optionLabel?: string;
@@ -83,15 +84,25 @@
     .dropdown, .date-picker {
       width: 100%;
     }
-  
+
+    .textarea {
+      width: calc(100% - 1.5rem);
+    }
+
     input {
+      border: none;
+      border-bottom: 1px solid #ced4da;
+    }
+    .textarea {
+      border: 1px solid #ced4da;
+    }
+    input, .textarea {
       padding: 0.75rem;
       width: calc(100% - 1.5rem);
       font-family: "Montserrat", Helvetica, Arial, sans-serif;
       font-weight: 400;
       font-size: inherit;
-      border: none;
-      border-bottom: 1px solid #ced4da;
+      
       &.placeholder {
         color: #6c757d;
       }
