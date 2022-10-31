@@ -1,6 +1,6 @@
 <template>
   <button :class="`flip-btn ${props.class}`" type="button" @click="onButtonClick($event)">
-    <span class="flip-btn-front"
+    <span class="flip-btn-back"
       :style="`
         color: ${props.styleFront?.color};
         font-size: ${props.styleFront?.fontSize};
@@ -9,7 +9,7 @@
     >
       {{ props.label }}
     </span> 
-    <img :class="`icon iconBG ${props.styleBack?.color||'color-orange'} flip-btn-back`" 
+    <img :class="`icon iconBG ${props.styleBack?.color||'color-orange'} flip-btn-front`" 
       :alt="props.alt || props.label" 
       :src="require(`../assets/media/icons/${props.icon}`)" 
     />
@@ -50,7 +50,7 @@ const onButtonClick = (event: Event) => {
 .flip-btn {
   position: relative;
   z-index: 20;
-  padding: 0 8px;
+  padding: 15px 8px;
   border: 2px solid var(--main-text);
   border-radius: 5px;
   display: inline-block;
@@ -66,6 +66,8 @@ const onButtonClick = (event: Event) => {
     transform: translateY(0) rotateX(0);
     opacity: 1;
     width: 100%;
+    height: 20px;
+    margin-top: -10px;
     display: flex;
     justify-content: center;
     transition: all 0.4s ease;
@@ -73,11 +75,15 @@ const onButtonClick = (event: Event) => {
 
   .flip-btn-back {
     position: absolute;
-    top: 3px;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 20px;
+    display: flex;
+    justify-content: center;
+    color: var(--orange);
+    line-height: 26.6px;
+    align-items: center;
+    height: 100%;
     opacity: 0;
     transform: translateY(-50%) rotateX(-90deg);
     transition: all 0.4s ease;

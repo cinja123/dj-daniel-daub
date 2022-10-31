@@ -44,13 +44,19 @@
     new FormItem('information', undefined, undefined, 'textarea', 'weitere Informationen ...', undefined)
   ];
 
+  const phoneNumber = (phoneNumber: string) => (/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/.test(phoneNumber));
+
   const validationRules = {
     firstname: { required: helpers.withMessage('Vorname eingeben', required) },
     lastname: { required: helpers.withMessage('Nachname eingeben', required) },
-    email: { required: helpers.withMessage('E-Mail eingeben', required),
+    email: { 
+      required: helpers.withMessage('E-Mail eingeben', required),
       email: helpers.withMessage('Keine gültige E-Mail', email)
     },
-    phone: { required: helpers.withMessage('Telefonnummer eingeben', required) },
+    phone: { 
+      required: helpers.withMessage('Telefonnummer eingeben', required),
+      phoneNumber: helpers.withMessage('Keine gültige Telefonnummer', phoneNumber),
+    },
     information: {}
   }
 

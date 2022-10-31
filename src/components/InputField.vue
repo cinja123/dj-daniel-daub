@@ -5,7 +5,7 @@
       :id="props.id" 
       v-model="selected" 
       :options="props.options" 
-      :optionLabel="props.optionLabel||null" 
+      :optionLabel="props.optionLabel" 
       :placeholder="props.placeholder||''"
       scrollHeight="400px"
     />
@@ -37,7 +37,7 @@
   }>()
 
   const props = defineProps<{
-    type: 'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton' | 'textarea';
+    type: string //'dropdown' | 'date' | 'text' | 'chips' | 'zip' | 'selectbutton' | 'textarea';
     label?: string;
     selected?: any | any[];
     options?: any[];
@@ -95,6 +95,7 @@
     }
     .textarea {
       border: 1px solid #ced4da;
+      cursor: alias;
     }
     input, .textarea {
       padding: 0.75rem;
@@ -117,6 +118,7 @@
         border-color: var(--orange);
       }
     }
+
     .error {
       visibility: hidden;
     }
