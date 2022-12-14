@@ -71,7 +71,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
    * Handle show navbar on scroll
    */
   const isScrolling = ref(false);
-  let timeoutIdScroll = 0;
+  let timeoutIdScroll: any = 0;
   const scrollDetector = () => {
     scroll.value.on('scroll', () => {
       isScrolling.value = true;
@@ -89,7 +89,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
    * Handle show navbar on mouse moving
    */
   const mouseMoving = ref(false);
-  let timeoutIdMouse = 0;
+  let timeoutIdMouse: any = 0;
   onMounted(() => nextTick(() => window.addEventListener('mousemove', onMousemove)))
   onBeforeUnmount(() => window.removeEventListener('mousemove', onMousemove))
   const onMousemove = () => {
@@ -126,7 +126,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     });
   }
 
-  let timeoutidRendered = 0;
+  let timeoutidRendered: any = 0;
   const updateScroll = () => {
     console.log('rendered');
     window.clearTimeout(timeoutidRendered);
@@ -189,8 +189,8 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   const userForm = markRaw(UserForm);
 
   const contactItems = [
-    {label: 'test', component: eventForm, icon: 'eventIcon.svg'},
-    {label: 'test2', component: locationForm, icon: 'eventLocationIcon.svg'},
+    {label: 'event', component: eventForm, icon: 'eventIcon.svg'},
+    {label: 'location', component: locationForm, icon: 'eventLocationIcon.svg'},
     {label: 'test3', component: userForm, icon: 'userIcon.svg'}
   ]
 

@@ -8,7 +8,7 @@
       <div class="contact-body">
         <Transition :name="`transition${transitionMove}`">
           <KeepAlive>
-            <component :is="formInView" @onNextClick="changePage(1)" @onPrevClick="changePage(-1)" @onSend="submitForms" class="form-component"></component>
+            <component :is="formInView" @onNextClick="saveData" @onPrevClick="changePage(-1)" @onSend="submitForms" class="form-component"></component>
           </KeepAlive>
         </Transition>
 
@@ -27,6 +27,15 @@
   const currentPage = ref(0);
   const formInView = shallowRef(props.items[0].component);
   const transitionMove = ref<'right'|'left'>('left');
+  const formData: Record<string, any> = {};
+
+  const saveData = (data: Record<string, any>) => {
+    console.log('form data', data);
+    const key = Object.values(props.items)[currentPage.value].label;
+    formData[key] = data;
+    changePage(1);
+  }
+
   const changePage = (delta: -1|1) => {
     if((delta === 1 && currentPage.value < props.items.length) || (delta === -1 && currentPage.value > 0)){
       transitionMove.value = delta > 0 ? 'left' : 'right';
@@ -36,7 +45,8 @@
   }
 
   const submitForms = () => {
-    console.log('send Form');
+    console.log('send Form', formData);
+    // sendEmail(formData, 'cinja1994@yahoo.de');
   }
 
 
