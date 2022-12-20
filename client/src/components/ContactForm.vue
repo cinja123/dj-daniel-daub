@@ -19,6 +19,7 @@
 <script lang="ts" setup>
   import { defineProps, shallowRef, ref } from 'vue';
   import ProgressSteps from './ProgressSteps.vue';
+  import { sendEmaiConfirmation } from '@/remoteService/emailService';
 
   const props = defineProps<{
     items: {label: string, component: any, icon: string}[];
@@ -44,9 +45,12 @@
     }
   }
 
-  const submitForms = () => {
+  const submitForms = (data: Record<string, any>) => {
+    const key = Object.values(props.items)[currentPage.value].label;
+    formData[key] = data;
     console.log('send Form', formData);
-    // sendEmail(formData, 'cinja1994@yahoo.de');
+    sendEmaiConfirmation(formData);
+    //sendEmail(formData, 'cinja1994@yahoo.de');
   }
 
 

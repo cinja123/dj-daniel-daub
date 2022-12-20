@@ -6,6 +6,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: AppWrapper,
+  },
+  {
+    path: '/pictures',
+    name: 'pictures',
+    component: () => import('@/components/EmailPictures.vue'),
   }
 ]
 

@@ -4,3 +4,6 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module 'locomotive-scroll'
+declare module 'hyphen/de-1996'

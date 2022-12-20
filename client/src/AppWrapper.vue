@@ -105,7 +105,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
  */
 
   const scrollSection = ref(null);
-  const scroll = ref<locomotiveScroll>();
+  const scroll = ref<any>();
   const scrollIns = null;
 
   const initLocoScroll = () => {
@@ -191,7 +191,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   const contactItems = [
     {label: 'event', component: eventForm, icon: 'eventIcon.svg'},
     {label: 'location', component: locationForm, icon: 'eventLocationIcon.svg'},
-    {label: 'test3', component: userForm, icon: 'userIcon.svg'}
+    {label: 'user', component: userForm, icon: 'userIcon.svg'}
   ]
 
 </script>

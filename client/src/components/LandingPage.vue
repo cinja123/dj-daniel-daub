@@ -63,7 +63,7 @@
   
 
   const localeScrollContainer = ref(null);
-  const scroll = ref<locomotiveScroll>();
+  const scroll = ref<any>();
   const scrollIns = null; // eslint-disable-line
 
   const initLocoScroll = () => {
