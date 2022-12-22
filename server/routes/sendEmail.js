@@ -13,7 +13,7 @@ router.post('/sendEmail/confirmation', (req, res) => {
 
   const source = fs.readFileSync(path.join(path.resolve(), 'templates', 'emailTemplate.hbs'), 'utf-8');
 
-  if(!eventData) return res.status(500).json('no data provided');
+  if (!eventData) return res.status(500).json('no data provided');
   const transporter = nodemailer.createTransport({
     port: process.env.EMAIL_PORT,
     host: process.env.EMAIL_HOST,
@@ -40,23 +40,27 @@ router.post('/sendEmail/confirmation', (req, res) => {
   const mailOptions = {
     from: `DJ Daniel Daub <${process.env.APPLICATION_EMAIL}>`,
     to: eventData.user.email,
-    subject: `Eingangsbestätigung für die Anfrage vom ${(new Date(eventData.event.date)).toLocaleDateString('de-DE')}`,
+    subject: `Eingangsbestätigung der Anfrage für den ${(new Date(eventData.event.date)).toLocaleDateString('de-DE')}`,
     template: 'emailTemplate',
     context: {
-      message: 'test',
+      subject: "Anfrage",
+      salutation: "Herzlichen Dank für deine Anfrage!",
+      message: `Hallo ${eventData.user.firstname}, \n\num alle weiteren Details zu besprechen trage dich bitte für ein kostenloses Erstgespräch ein. \n\n`,
+      url: 'https://calendly.com/djdanieldaub/beratungsgespraech',
+      url_name: 'Termin vereinbaren'
     }
   };
 
   transporter.sendMail(mailOptions, (err, data) => {
-    console.log('password',process.env.EMAIL_HOST_PASSWORD);
-    if(err) {
+    console.log('password', process.env.EMAIL_HOST_PASSWORD);
+    if (err) {
       console.log(`Error: ${err}`);
       res.status(500).json(err);
     } else {
-      console.log("EMAIL sent");
+      console.log("EMAIL sent", eventData);
       res.status(200).json('Email sent succesfully');
     }
   })
 })
 
-export {router as EmailRouter}
+export { router as EmailRouter }
