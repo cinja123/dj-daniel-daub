@@ -1,7 +1,5 @@
 import { Router } from "express";
 import nodemailer from 'nodemailer';
-import * as fs from 'fs';
-import * as path from 'path';
 import hbs from 'nodemailer-express-handlebars';
 
 const router = Router();
@@ -9,9 +7,6 @@ const router = Router();
 // send confirmation email to client
 router.post('/sendEmail/confirmation', (req, res) => {
   const eventData = req.body.eventData;
-  // console.log(eventData, __dirname);
-
-  const source = fs.readFileSync(path.join(path.resolve(), 'templates', 'emailTemplate.hbs'), 'utf-8');
 
   if (!eventData) return res.status(500).json('no data provided');
   const transporter = nodemailer.createTransport({
@@ -37,6 +32,7 @@ router.post('/sendEmail/confirmation', (req, res) => {
     })
   )
 
+  // mail to customer
   const mailOptions = {
     from: `DJ Daniel Daub <${process.env.APPLICATION_EMAIL}>`,
     to: eventData.user.email,
@@ -51,13 +47,52 @@ router.post('/sendEmail/confirmation', (req, res) => {
     }
   };
 
+  // mail to dj
+  const mailOptionsDj = {
+    from: `WHOOOP NEUE ANFRAGE! <${process.env.APPLICATION_EMAIL}>`,
+    to: process.env.APPLICATION_EMAIL,
+    subject: `WHOOOP WHOOP Cash in die Tash! ${eventData.event.date}`,
+    template: 'emailTemplate',
+    context: {
+      message: `Lieber Daniel, du hast eine neue Event Anfrage :) \n
+        Persönliche Daten: \n
+        Name: ${eventData.user.firstname} ${eventData.user.lastname} \n
+        E-mail: ${eventData.user.email} \n
+        Telefon: ${eventData.user.phone} \n\n
+        Event: \n
+        Anlass: ${eventData.event.occassion.name} \n
+        Datum: ${eventData.event.date} \n
+        Gäste: ${eventData.event.numberGuests.displayName} \n
+        Dauer: ${eventData.event.duration.displayName} \n
+        Musik: ${eventData.event.music.map(music => music.displayName)} \n
+        Weitere Infos: ${eventData.user.information} \n\n
+        Location:
+        Locationname: ${eventData.location.locationName} \n
+        PLZ: ${eventData.location.zipCode} \n
+        Stadt: ${eventData.location.city} \n
+        Technologie: ${eventData.location.eventTechnology.name} \n\n
+
+        Have fun und HDL Cinja <3
+      `
+    }
+  }
+
   transporter.sendMail(mailOptions, (err, data) => {
-    console.log('password', process.env.EMAIL_HOST_PASSWORD);
     if (err) {
       console.log(`Error: ${err}`);
       res.status(500).json(err);
     } else {
       console.log("EMAIL sent", eventData);
+      res.status(200).json('Email sent succesfully');
+    }
+  })
+  transporter.sendMail(mailOptionsDj, (err, data) => {
+    console.log('password', process.env.EMAIL_HOST_PASSWORD);
+    if (err) {
+      console.log(`Error: ${err}`);
+      res.status(500).json(err);
+    } else {
+      console.log("EMAIL sent to DJ");
       res.status(200).json('Email sent succesfully');
     }
   })
