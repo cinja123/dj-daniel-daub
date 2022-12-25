@@ -91,8 +91,7 @@
 </script>
 <style lang="scss">
   #landing {
-    height: 100vh !important;
-    border: 1px solid green;    
+    height: 100vh !important;    
 
     > section {
 

@@ -89,12 +89,10 @@
 </script>
 <style lang="scss" scoped>
   #music {
-    border: 3px solid green;
     width: 100vw;
 
     #music-wrapper {
       background-color: var(--main-text);
-      border: 1px dashed rgba(92, 163, 153, 0.641);
       min-height: 100vh; 
 
       > div:first-child {

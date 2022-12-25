@@ -66,7 +66,6 @@ const submitForms = async (data: Record<string, any>) => {
 <style lang="scss" scoped>
 #contact {
   min-height: 120vh;
-  border: 1px solid green;
   display: flex;
   justify-content: center;
 

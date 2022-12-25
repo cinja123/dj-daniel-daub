@@ -1,6 +1,13 @@
 <template>
   <header></header>
-  <dock v-if="isScrolling || hoveringNav || mouseMoving" class="navBar" :model="sections" :position="navPosition" @mouseover="hoveringNav = true" @mouseleave="hoveringNav = false">
+  <dock 
+    v-if="isScrolling || hoveringNav || mouseMoving" 
+    class="navBar" 
+    :model="sections" 
+    :position="navPosition" 
+    @mouseover="hoveringNav = true" 
+    @mouseleave="hoveringNav = false"
+  >
     <template #icon="{ item }">
       <div class="item-wrapper">
         <span v-if="navPosition === 'right'" :class="'label-' + navPosition">{{ item.label }}</span>
@@ -12,7 +19,7 @@
     </template>
   </dock>
   <Loading :active="isLoading" :is-full-page="true" color="var(--orange)"/>
-  <div ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
+  <div ref="scrollSection" data-scroll-container>
     <main>
       <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>

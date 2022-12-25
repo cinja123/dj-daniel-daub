@@ -49,20 +49,14 @@
 </script>
 <style lang="scss" scoped>
   #about-me {
-    border: 1px solid green;
     padding-bottom: 70vh;    
 
     #about-wrapper {
-      //background-color: rgba(100, 100, 100, 0.6);
       position: relative;
       padding-bottom: 20vh;
       @media screen and (min-width: 800px){
         display: flex;
         height: 150vh;
-      }
-
-      section {
-        //border: 1px dashed red;
       }
   
       .description {
