@@ -3,7 +3,7 @@
   <dock v-if="isScrolling || hoveringNav || mouseMoving" class="navBar" :model="sections"
     :position="navPosition" @mouseover="hoveringNav = true" @mouseleave="hoveringNav = false">
     <template #icon="{ item }">
-      <div class="item-wrapper">
+      <div class="item-wrapper" @click="scrollToSection(item.id)">
         <span v-if="navPosition === 'right'" :class="'label-' + navPosition">{{ item.label }}</span>
         <img :class="`icon iconBG color-white nav-${navPosition}`" :alt="item.label?.toString()"
           :src="require(`./assets/media/icons/${item.icon}`)" />
@@ -21,7 +21,8 @@
       <music-examples :videos="videos" :scroller="scroll" data-scroll-section
         @rendered="updateScroll"></music-examples>
       <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
-      <contact-form :items="contactItems" style="z-index: 10; position: relative;"
+      <contact-form :items="contactItems"
+        :style="`z-index: ${navPosition === 'right' ? 0 : 10}; position: relative;`"
         data-scroll-section />
     </main>
     <app-footer data-scroll-section @rendered="updateScroll"></app-footer>
@@ -134,7 +135,6 @@ const initLocoScroll = () => {
 
 let timeoutidRendered: any = 0;
 const updateScroll = () => {
-  console.log('rendered');
   window.clearTimeout(timeoutidRendered);
   timeoutidRendered = setTimeout(() => {
     isLoading.value = false;
@@ -149,6 +149,10 @@ onMounted(() => {
     scrollDetector();
   })
 })
+
+const scrollToSection = (section: string) => {
+  scroll.value.scrollTo(document.querySelector(`#${section}`));
+}
 
 
 /**
