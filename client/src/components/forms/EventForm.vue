@@ -64,7 +64,6 @@
   const nextPage = async() => {
     validated.value = true;
     const isFormValid = await v$.value.$validate();
-    console.log('check event data', v$.value.occassion);
     if (isFormValid) {
       emit('onNextClick', eventData.value);
     }

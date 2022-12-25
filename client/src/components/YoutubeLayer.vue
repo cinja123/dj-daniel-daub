@@ -50,13 +50,11 @@
 
   const youTubeKey = ref(0);
   watch(() => props.width, () => {
-    console.log('New video width', props.width);
     youTube.value.player.setSize(props.width, props.height);
   });
 
   const videoLayer = ref();
   const onLayerClick = (event: Event) => {
-    console.log(event, videoLayer.value);
     videoLayer.value.parentElement.style.overflow = 'hidden';
     videoLayer.value.classList.remove('show');
     videoLayer.value.classList.add('hide');
@@ -67,7 +65,6 @@
 
   
   const onVideoClick = () => {
-    console.log('videoclick');
     videoLayer.value.style.display = 'block';
     setTimeout(() => {
       videoLayer.value.classList.add('show');

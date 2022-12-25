@@ -20,6 +20,7 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.17.0",
     "vue": "^3.2.13",
+    "vue-loading-overlay": "6.0",
     "vue-router": "^4.0.3",
     "youtube-vue3": "^0.1.15"
   },

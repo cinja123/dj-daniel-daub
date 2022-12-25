@@ -82,17 +82,14 @@ router.post('/sendEmail/confirmation', (req, res) => {
       console.log(`Error: ${err}`);
       res.status(500).json(err);
     } else {
-      console.log("EMAIL sent", eventData);
       res.status(200).json('Email sent succesfully');
     }
   })
   transporter.sendMail(mailOptionsDj, (err, data) => {
-    console.log('password', process.env.EMAIL_HOST_PASSWORD);
     if (err) {
       console.log(`Error: ${err}`);
       res.status(500).json(err);
     } else {
-      console.log("EMAIL sent to DJ");
       res.status(200).json('Email sent succesfully');
     }
   })
