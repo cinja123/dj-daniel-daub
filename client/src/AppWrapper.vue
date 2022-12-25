@@ -11,11 +11,12 @@
       </div>
     </template>
   </dock>
+  <Loading :active="isLoading" :is-full-page="true" color="var(--orange)"/>
   <div ref="scrollSection" data-scroll-container style="border: 2px solid yellow">
     <main>
       <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']" logo="logo_white.png" data-scroll-section @rendered="updateScroll"/>
       <about-me :description="description" :photoGrid="['daniel3.jpg', 'daniel2.jpg', 'daniel5.jpg', 'daniel4.jpg']" data-scroll-section @rendered="updateScroll"/>
-      <!-- <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples> -->
+      <music-examples :videos="videos" :scroller="scroll" data-scroll-section @rendered="updateScroll"></music-examples>
       <gallery-view :pictures="gallery" data-scroll-section @rendered="updateScroll"></gallery-view>
       <contact-form :items="contactItems" style="z-index: 10; position: relative;" data-scroll-section/>
     </main>
@@ -25,6 +26,7 @@
   
 </template>
 <script setup lang="ts">
+import Loading from 'vue-loading-overlay';
 import AppFooter from '@/components/AppFooter.vue';
 import LandingPage from './components/LandingPage.vue';
 import AboutMe from './components/AboutMe.vue';
@@ -39,7 +41,7 @@ import EventForm from '@/components/forms/EventForm.vue';
 import LocationForm from '@/components/forms/LocationForm.vue';
 import UserForm from '@/components/forms/UserForm.vue';
 
-
+const isLoading = ref<boolean>(true);
 
 const screenWidth = ref(0);
 const onResize = () => {screenWidth.value = window.innerWidth;}
@@ -131,6 +133,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     console.log('rendered');
     window.clearTimeout(timeoutidRendered);
     timeoutidRendered = setTimeout(() => {
+      isLoading.value = false;
       console.log('update scroller');
       scroll.value.update();
     }, 700)
@@ -196,6 +199,19 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
 </script>
 <style lang="scss" scoped>
+  .vl-full-page {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-bg);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .navBar {
     position: fixed;
 
