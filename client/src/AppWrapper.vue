@@ -10,7 +10,7 @@
       </div>
     </template>
   </dock>
-  <Loading :active="isLoading" :is-full-page="true" color="var(--orange)" />
+  <Loading :active="!store.visited" :is-full-page="true" color="var(--orange)" />
   <div ref="scrollSection" data-scroll-container>
     <main>
       <landing-page :pictures="['daniel3.jpg', 'daniel2.jpg', 'daniel4.jpg', 'daniel5.jpg']"
@@ -45,8 +45,7 @@ import ContactForm from './components/ContactForm.vue';
 import EventForm from '@/components/forms/EventForm.vue';
 import LocationForm from '@/components/forms/LocationForm.vue';
 import UserForm from '@/components/forms/UserForm.vue';
-
-const isLoading = ref<boolean>(true);
+import { store } from '@/store';
 
 const screenWidth = ref(0);
 const onResize = () => { screenWidth.value = window.innerWidth; }
@@ -137,7 +136,7 @@ let timeoutidRendered: any = 0;
 const updateScroll = () => {
   window.clearTimeout(timeoutidRendered);
   timeoutidRendered = setTimeout(() => {
-    isLoading.value = false;
+    store.visitLandingPage();
     console.log('update scroller');
     scroll.value.update();
   }, 700)
@@ -147,6 +146,9 @@ onMounted(() => {
   nextTick(() => {
     initLocoScroll();
     scrollDetector();
+    if(store.visited) {
+      updateScroll();
+    }
   })
 })
 

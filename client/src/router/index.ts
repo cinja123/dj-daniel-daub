@@ -11,6 +11,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/pictures',
     name: 'pictures',
     component: () => import('@/components/EmailPictures.vue'),
+  },
+  {
+    path: '/impressum',
+    name: 'impressum',
+    component: () => import('@/views/ImprintView.vue'),
+  },
+  {
+    path: '/datenschutz',
+    name: 'dataProtection',
+    component: () => import('@/views/DataProtection.vue'),
   }
 ]
 

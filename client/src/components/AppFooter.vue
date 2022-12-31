@@ -32,8 +32,8 @@
       <img class="logo-orange" alt="logo" :src="require('@/assets/media/logos/logo_orange.png')" />
     </article>
     <article class="legals">
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
+      <router-link to="/impressum">Impressum</router-link>
+      <router-link to="/datenschutz">Datenschutz</router-link>
     </article>
     <p>Copyright &#169; 2022 Daniel Daub</p>
   </footer>
