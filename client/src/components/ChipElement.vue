@@ -1,5 +1,5 @@
 <template>
-  <div :class="`chip ${props.selected ? 'selected' : 'unselected'}`" @click="chipClicked(this.chip)">
+  <div :class="`chip ${props.selected ? 'selected' : 'unselected'}`" @click="chipClicked(chip)">
     <span>{{ typeof props.chip === 'string' ? props.chip : props.optionLabel ? props.chip[props.optionLabel] : props.chip }}</span>
   </div>
 </template>
@@ -17,6 +17,7 @@
   }>()
 
   const chipClicked = (value: any) => {
+    // const selected = props.selec
     emit('chipClicked', JSON.parse(JSON.stringify(value)), !props.selected);
   }
 

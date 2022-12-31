@@ -40,8 +40,9 @@
 
   const getAllSelectedChips = () => {
     let allSelected: any[] = [];
+    const selected = props.selected || [];
     props.options.forEach(option => {
-      if(props.selected.find(selectedObj => selectedObj.value === option.value)) {
+      if(selected.find(selectedObj => selectedObj.value === option.value)) {
         allSelected.push(option);
       }
     })
