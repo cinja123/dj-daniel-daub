@@ -71,7 +71,6 @@ import { store } from '@/store';
 import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import locomotiveScroll from 'locomotive-scroll';
-console.log('store', store.visited)
 
 const scrollSection = ref(null);
 const scroll = ref<any>();

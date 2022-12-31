@@ -21,8 +21,11 @@
   ],
   "musicGenres": [
     {"displayName": "Hip Hop", "value": "hipHop"},
-    {"displayName": "Hip Hop 2", "value": "hipHop2"},
-    {"displayName": "Hip Hop 3", "value": "hipHop3"},
-    {"displayName": "Hip Hop 4", "value": "hipHop4"}
+    {"displayName": "House", "value": "house"},
+    {"displayName": "80er", "value": "80"},
+    {"displayName": "90er", "value": "90"},
+    {"displayName": "2000er", "value": "2000"},
+    {"displayName": "Schlager", "value": "schlager"},
+    {"displayName": "Elektro", "value": "elektro"}
   ]
 }

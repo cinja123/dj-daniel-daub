@@ -8,7 +8,7 @@
         @chipClicked="updateSelected"
       ></ChipElement>
     </div>
-    <Chips v-model="ownChips" separator="," :placeholder="props.placeholder" />
+    <Chips v-model="ownChips" separator="," :placeholder="props.placeholder" @add="updateChips" @remove="removeCustomChip"/>
   </div>
 </template>
 <script lang="ts" setup>
@@ -36,7 +36,34 @@
       newSelected = newSelected.filter(obj => obj[props.optionLabel] !== value[props.optionLabel]);
     }
     emit('update:selected', newSelected)
+  }
 
+  const getAllSelectedChips = () => {
+    let allSelected: any[] = [];
+    props.options.forEach(option => {
+      if(props.selected.find(selectedObj => selectedObj.value === option.value)) {
+        allSelected.push(option);
+      }
+    })
+    return allSelected
+  }
+
+  const removeCustomChip = (removedChip: any) => {
+    let allSelected = props.selected;
+    const index = allSelected.findIndex((selected) => selected.value === removedChip.value[0]);
+    allSelected.splice(index, 1);
+    emit('update:selected', allSelected);
+  }
+
+  const updateChips = (newChips: Record<string, any>) => {
+    let allSelected = getAllSelectedChips();
+    newChips.value.forEach((customerChip: string) => {
+      allSelected.push({
+        displayName: customerChip,
+        value: customerChip
+      })
+    });
+    emit('update:selected', allSelected);
   }
 
   const allSelected = computed(() => props.selected ? props.selected.map(el => el[props.optionLabel]) : []);
